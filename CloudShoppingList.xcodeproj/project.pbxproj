@@ -12,9 +12,12 @@
 		4313D34C20D4610A00B93B11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4313D34A20D4610A00B93B11 /* Main.storyboard */; };
 		4313D34E20D4610C00B93B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4313D34D20D4610C00B93B11 /* Assets.xcassets */; };
 		4313D35120D4610C00B93B11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4313D34F20D4610C00B93B11 /* LaunchScreen.storyboard */; };
+		4313D35920D4617D00B93B11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4313D35820D4617C00B93B11 /* GoogleService-Info.plist */; };
+		CF2DEB915904A78BC87C5BF9 /* Pods_CloudShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3874D6B081102F9B10EDC382 /* Pods-CloudShoppingList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.debug.xcconfig"; sourceTree = "<group>"; };
 		4313D34320D4610A00B93B11 /* CloudShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4313D34620D4610A00B93B11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4313D34820D4610A00B93B11 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,9 @@
 		4313D34D20D4610C00B93B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4313D35020D4610C00B93B11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4313D35220D4610C00B93B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4313D35820D4617C00B93B11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2DEB915904A78BC87C5BF9 /* Pods_CloudShoppingList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42D44A2111A6D3DED6F169EB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3874D6B081102F9B10EDC382 /* Pods-CloudShoppingList.debug.xcconfig */,
+				CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4313D33A20D4610A00B93B11 = {
 			isa = PBXGroup;
 			children = (
 				4313D34520D4610A00B93B11 /* CloudShoppingList */,
 				4313D34420D4610A00B93B11 /* Products */,
+				42D44A2111A6D3DED6F169EB /* Pods */,
+				7815DB1560EFD92CC33B7320 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +72,55 @@
 		4313D34520D4610A00B93B11 /* CloudShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				4313D35D20D461DC00B93B11 /* Utility */,
+				4313D35C20D461C400B93B11 /* View */,
+				4313D35B20D461BD00B93B11 /* Controller */,
+				4313D35A20D461B700B93B11 /* Model */,
 				4313D34620D4610A00B93B11 /* AppDelegate.swift */,
-				4313D34820D4610A00B93B11 /* ViewController.swift */,
-				4313D34A20D4610A00B93B11 /* Main.storyboard */,
-				4313D34D20D4610C00B93B11 /* Assets.xcassets */,
-				4313D34F20D4610C00B93B11 /* LaunchScreen.storyboard */,
 				4313D35220D4610C00B93B11 /* Info.plist */,
+				4313D35820D4617C00B93B11 /* GoogleService-Info.plist */,
 			);
 			path = CloudShoppingList;
+			sourceTree = "<group>";
+		};
+		4313D35A20D461B700B93B11 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4313D35B20D461BD00B93B11 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4313D35C20D461C400B93B11 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4313D34820D4610A00B93B11 /* ViewController.swift */,
+				4313D34A20D4610A00B93B11 /* Main.storyboard */,
+				4313D34F20D4610C00B93B11 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4313D35D20D461DC00B93B11 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				4313D34D20D4610C00B93B11 /* Assets.xcassets */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		7815DB1560EFD92CC33B7320 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +130,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4313D35520D4610C00B93B11 /* Build configuration list for PBXNativeTarget "CloudShoppingList" */;
 			buildPhases = (
+				F485AB739AF6517F2EAAF81A /* [CP] Check Pods Manifest.lock */,
 				4313D33F20D4610A00B93B11 /* Sources */,
 				4313D34020D4610A00B93B11 /* Frameworks */,
 				4313D34120D4610A00B93B11 /* Resources */,
+				C4ACA640D868A2FA94BE485D /* [CP] Embed Pods Frameworks */,
+				21052598A8343FDA1AE1C5AF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,12 +185,69 @@
 			buildActionMask = 2147483647;
 			files = (
 				4313D35120D4610C00B93B11 /* LaunchScreen.storyboard in Resources */,
+				4313D35920D4617D00B93B11 /* GoogleService-Info.plist in Resources */,
 				4313D34E20D4610C00B93B11 /* Assets.xcassets in Resources */,
 				4313D34C20D4610A00B93B11 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21052598A8343FDA1AE1C5AF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4ACA640D868A2FA94BE485D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F485AB739AF6517F2EAAF81A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CloudShoppingList-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4313D33F20D4610A00B93B11 /* Sources */ = {
@@ -278,6 +397,7 @@
 		};
 		4313D35620D4610C00B93B11 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3874D6B081102F9B10EDC382 /* Pods-CloudShoppingList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +416,7 @@
 		};
 		4313D35720D4610C00B93B11 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
