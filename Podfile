@@ -1,4 +1,5 @@
 # Uncomment the next line to define a global platform for your project
+  pod 'FirebaseUI/Database'
 # platform :ios, '9.0'
 
 target 'CloudShoppingList' do
@@ -7,4 +8,17 @@ target 'CloudShoppingList' do
 
   # Pods for CloudShoppingList
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Storage'
+  pod 'FirebaseUI/Auth', '~> 5.0'
+  pod 'FirebaseUI/Google', '~> 5.0'
+  pod 'FirebaseUI/Twitter', '~> 5.0'
+  pod 'GoogleSignIn'
+  pod 'SVProgressHUD'
+  pod 'Kingfisher', '~> 4.0'
+  pod 'Firebase/Firestore'
+  pod 'SwiftMessages'
+  pod 'FirebaseUI/Database'
+  pod 'SwiftyJSON', '~> 4.0'
 end
