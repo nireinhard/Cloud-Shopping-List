@@ -38,6 +38,10 @@
 		435F36D720FB945400586B13 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36D620FB945400586B13 /* TabViewController.swift */; };
 		435F36DB20FB9C5C00586B13 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36DA20FB9C5C00586B13 /* Me.swift */; };
 		435F36DD20FB9E5700586B13 /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36DC20FB9E5700586B13 /* ShoppingListTableViewCell.swift */; };
+		435F36DF20FBAA1400586B13 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36DE20FBAA1400586B13 /* ShoppingList.swift */; };
+		435F36E120FBAA3500586B13 /* ShoppingListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E020FBAA3500586B13 /* ShoppingListController.swift */; };
+		435F36E320FBACBC00586B13 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E220FBACBC00586B13 /* DetailsViewController.swift */; };
+		435F36E520FBC50400586B13 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E420FBC50400586B13 /* ProfileViewController.swift */; };
 		CF2DEB915904A78BC87C5BF9 /* Pods_CloudShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +80,10 @@
 		435F36D620FB945400586B13 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		435F36DA20FB9C5C00586B13 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		435F36DC20FB9E5700586B13 /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
+		435F36DE20FBAA1400586B13 /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
+		435F36E020FBAA3500586B13 /* ShoppingListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListController.swift; sourceTree = "<group>"; };
+		435F36E220FBACBC00586B13 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		435F36E420FBC50400586B13 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				435F36CE20FA89D500586B13 /* User.swift */,
+				435F36DE20FBAA1400586B13 /* ShoppingList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				435F36CA20FA6A1C00586B13 /* AuthenticationController.swift */,
+				435F36E020FBAA3500586B13 /* ShoppingListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -161,6 +171,8 @@
 				435F36D420FB931100586B13 /* LandingViewController.swift */,
 				435F36D620FB945400586B13 /* TabViewController.swift */,
 				435F36DC20FB9E5700586B13 /* ShoppingListTableViewCell.swift */,
+				435F36E220FBACBC00586B13 /* DetailsViewController.swift */,
+				435F36E420FBC50400586B13 /* ProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -401,14 +413,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				435F36DD20FB9E5700586B13 /* ShoppingListTableViewCell.swift in Sources */,
+				435F36DF20FBAA1400586B13 /* ShoppingList.swift in Sources */,
 				435F36CB20FA6A1C00586B13 /* AuthenticationController.swift in Sources */,
+				435F36E120FBAA3500586B13 /* ShoppingListController.swift in Sources */,
 				435F36D320FB8C1900586B13 /* RegisterViewController.swift in Sources */,
 				435F36C920FA670600586B13 /* UIUtility.swift in Sources */,
 				435F36A720FA604200586B13 /* LoginViewController.swift in Sources */,
 				435F36D720FB945400586B13 /* TabViewController.swift in Sources */,
 				435F36DB20FB9C5C00586B13 /* Me.swift in Sources */,
+				435F36E520FBC50400586B13 /* ProfileViewController.swift in Sources */,
 				4313D34920D4610A00B93B11 /* HomeViewController.swift in Sources */,
 				435F36D120FA8A1C00586B13 /* FirebaseHelper.swift in Sources */,
+				435F36E320FBACBC00586B13 /* DetailsViewController.swift in Sources */,
 				4313D34720D4610A00B93B11 /* AppDelegate.swift in Sources */,
 				435F36CF20FA89D500586B13 /* User.swift in Sources */,
 				435F36C720FA64B200586B13 /* RoundedView.swift in Sources */,

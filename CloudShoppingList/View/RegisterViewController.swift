@@ -18,6 +18,9 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidLayoutSubviews() {
         UIUtility.configureTextFields(textFields: [usernameTextField, mailTextField, passwordTextField, passwordRetypeTextField])
     }
     

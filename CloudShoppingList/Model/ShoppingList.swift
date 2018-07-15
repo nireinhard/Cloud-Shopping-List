@@ -1,5 +1,5 @@
 //
-//  Me.swift
+//  ShoppingList.swift
 //  CloudShoppingList
 //
 //  Created by Niklas Reinhard on 15.07.18.
@@ -7,10 +7,7 @@
 //
 
 import Foundation
-import FirebaseAuth
 
-class Me {
-    static var uid: String {
-        return Auth.auth().currentUser!.uid
-    }
+struct ShoppingList{
+    var title: String
 }
