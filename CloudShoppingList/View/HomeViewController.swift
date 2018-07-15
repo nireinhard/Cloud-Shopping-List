@@ -29,7 +29,7 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        
+        performSegue(withIdentifier: "addSegue", sender: nil)
     }
 }
 

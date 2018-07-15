@@ -134,20 +134,62 @@
             </objects>
             <point key="canvasLocation" x="-106.40000000000001" y="-511.39430284857576"/>
         </scene>
-        <!--View Controller-->
+        <!--Create View Controller-->
         <scene sceneID="BqF-ce-hWi">
             <objects>
-                <viewController id="Ict-Ag-K5d" sceneMemberID="viewController">
+                <viewController id="Ict-Ag-K5d" customClass="CreateViewController" customModule="CloudShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tMJ-fT-y3j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Einkaufszettelname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y8C-hC-XnO">
+                                <rect key="frame" x="16" y="80" width="343" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="MIj-oS-djm"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1t-XK-BOZ" customClass="RoundedButton" customModule="CloudShoppingList" customModuleProvider="target">
+                                <rect key="frame" x="102.5" y="141" width="170" height="45"/>
+                                <color key="backgroundColor" red="0.4039215686" green="0.81960784310000001" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="OAG-0o-rb8"/>
+                                    <constraint firstAttribute="height" constant="45" id="d4W-2p-mzZ"/>
+                                </constraints>
+                                <state key="normal" title="Erstellen">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="y8C-hC-XnO" firstAttribute="top" secondItem="hQH-yM-aRE" secondAttribute="top" constant="16" id="GqP-Bk-zjt"/>
+                            <constraint firstItem="hQH-yM-aRE" firstAttribute="trailing" secondItem="y8C-hC-XnO" secondAttribute="trailing" constant="16" id="POA-dM-gxg"/>
+                            <constraint firstItem="y8C-hC-XnO" firstAttribute="leading" secondItem="hQH-yM-aRE" secondAttribute="leading" constant="16" id="aex-4j-NPe"/>
+                            <constraint firstItem="X1t-XK-BOZ" firstAttribute="centerX" secondItem="hQH-yM-aRE" secondAttribute="centerX" id="c57-Mi-XSp"/>
+                            <constraint firstItem="X1t-XK-BOZ" firstAttribute="top" secondItem="y8C-hC-XnO" secondAttribute="bottom" constant="16" id="x5b-xr-7W6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="hQH-yM-aRE"/>
                     </view>
+                    <connections>
+                        <outlet property="newListTextField" destination="y8C-hC-XnO" id="mKa-yT-C6A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Au-Oj-WC3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3470" y="-1189"/>
+            <point key="canvasLocation" x="3469.5999999999999" y="-1189.6551724137933"/>
         </scene>
         <!--Einkaufszettel-->
         <scene sceneID="h6D-bU-5xv">
@@ -220,7 +262,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButtonTapped:" destination="5R3-zs-Fv9" id="s27-PL-hxe"/>
-                                <segue destination="Ict-Ag-K5d" kind="show" id="2qe-1e-zP4"/>
+                                <segue destination="Ict-Ag-K5d" kind="show" identifier="addSegue" id="2qe-1e-zP4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -243,7 +285,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d5-2G-lvp">
                                 <rect key="frame" x="0.0" y="64" width="375" height="100"/>
-                                <color key="backgroundColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="dsD-me-Lbx"/>
                                 </constraints>
@@ -260,11 +302,21 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="324" id="BcT-bX-tnF"/>
                                 </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="HOB-aR-vyW">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HOB-aR-vyW" id="p0H-cm-VfL">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyQ-Ro-yNU">
                                 <rect key="frame" x="0.0" y="228" width="375" height="66"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-cS-O6W">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Neuer Eintrag" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dUf-cS-O6W">
                                         <rect key="frame" x="16" y="10.5" width="285" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="od3-qI-lrS"/>
@@ -272,6 +324,11 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                <color key="value" red="0.25490196079999999" green="0.29803921570000003" blue="0.32549019610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kwv-dZ-wwF" customClass="RoundedButton" customModule="CloudShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="309" y="8" width="50" height="50"/>
@@ -318,13 +375,65 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nel-QS-dwI"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ffe-gM-H9d">
+                        <barButtonItem key="rightBarButtonItem" title="Einladen" id="hKS-Dl-NS7">
+                            <connections>
+                                <action selector="shareButtonTapped:" destination="UcC-M6-dGg" id="k0t-GC-Fop"/>
+                                <segue destination="OnS-De-Hfu" kind="show" identifier="shareSegue" id="IUh-Vh-3gf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="newItemTextField" destination="dUf-cS-O6W" id="DeK-ts-l3y"/>
                         <outlet property="shoppingListNameLabel" destination="080-kV-dzH" id="bHe-z6-Dth"/>
+                        <outlet property="tableView" destination="eDc-6L-wYr" id="Cub-yK-OvZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ye-Nd-gGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3469.5999999999999" y="-511.39430284857576"/>
+        </scene>
+        <!--Share View Controller-->
+        <scene sceneID="0fu-OO-En4">
+            <objects>
+                <viewController id="OnS-De-Hfu" customClass="ShareViewController" customModule="CloudShoppingList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jH2-CS-oZx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LxM-0F-oy6">
+                                <rect key="frame" x="0.0" y="64" width="375" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFY-4Q-Nfh">
+                                        <rect key="frame" x="155.5" y="35.5" width="64" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <color key="textColor" red="0.4039215686" green="0.81960784310000001" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="JFY-4Q-Nfh" firstAttribute="centerY" secondItem="LxM-0F-oy6" secondAttribute="centerY" id="Dus-AE-XMg"/>
+                                    <constraint firstAttribute="height" constant="100" id="PNK-85-vQS"/>
+                                    <constraint firstItem="JFY-4Q-Nfh" firstAttribute="centerX" secondItem="LxM-0F-oy6" secondAttribute="centerX" id="nOt-wm-2Be"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LxM-0F-oy6" firstAttribute="trailing" secondItem="dlf-7r-edd" secondAttribute="trailing" id="N7R-vI-vzb"/>
+                            <constraint firstItem="LxM-0F-oy6" firstAttribute="top" secondItem="dlf-7r-edd" secondAttribute="top" id="df3-yT-VEr"/>
+                            <constraint firstItem="LxM-0F-oy6" firstAttribute="leading" secondItem="dlf-7r-edd" secondAttribute="leading" id="j0R-Q0-L2S"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dlf-7r-edd"/>
+                    </view>
+                    <connections>
+                        <outlet property="shareLinkLabel" destination="JFY-4Q-Nfh" id="Hnf-3w-9c6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P4l-hK-OI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4240.8000000000002" y="-511.39430284857576"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="drp-nN-0Yx">

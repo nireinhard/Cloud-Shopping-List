@@ -21,4 +21,5 @@ target 'CloudShoppingList' do
   pod 'SwiftMessages'
   pod 'FirebaseUI/Database'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'DZNEmptyDataSet'
 end
