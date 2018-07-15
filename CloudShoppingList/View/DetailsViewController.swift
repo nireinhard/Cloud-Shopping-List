@@ -16,7 +16,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var shoppingList: ShoppingList?
-    var items: String = [String]()
+    var items: [String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
