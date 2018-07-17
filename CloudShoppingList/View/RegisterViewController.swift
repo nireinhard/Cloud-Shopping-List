@@ -28,6 +28,7 @@ class RegisterViewController: UIViewController {
         SVProgressHUD.show()
         AuthenticationController.registerUser(withName: usernameTextField.text!, email: mailTextField.text!, password: passwordTextField.text!) { (user) in
             if let user = user{
+                SVProgressHUD.dismiss()
                 NotificationUtility.showPrettyMessage(with: "Du hast dich erfolgreich registriert", button: "ok", style: .success)
                 self.dismiss(animated: true, completion: nil)
             }else{

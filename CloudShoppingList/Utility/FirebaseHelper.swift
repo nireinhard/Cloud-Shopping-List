@@ -33,3 +33,9 @@ struct FirebaseHelper{
         }
     }
 }
+
+enum FirestoreData{
+    static let userCollection: String = "users"
+    static let profilePicStorage: String = "userProfilPictures"
+    static let groupCollection: String = "groups"
+}

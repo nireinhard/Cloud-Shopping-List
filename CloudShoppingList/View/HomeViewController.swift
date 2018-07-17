@@ -26,6 +26,14 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
         tableView.dataSource = self
         self.tableView.rowHeight = 75
         tableView.tableFooterView = UIView()
+        setupData()
+    }
+    
+    private func setupData(){
+        var shoppingLists = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("lists").observe(.value) { (snapshot) in
+            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            print(postDict)
+        }
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -43,6 +51,8 @@ extension HomeViewController: UITableViewDataSource{
         let info = JSON((shoppingLists[(UInt(indexPath.row))] as? DataSnapshot)?.value as Any).dictionaryValue
         
         print(info)
+        
+        print(info["members"])
         
         cell.configure(for: ShoppingList(title: (info["name"]?.stringValue)!), delegate: self)
         

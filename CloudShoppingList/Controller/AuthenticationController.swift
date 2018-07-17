@@ -23,8 +23,8 @@ struct AuthenticationController{
                 
                 user.user.sendEmailVerification(completion: nil)
                 
-                let usr = User(id: user.user.uid, username: withName, mail: email, pic: "", picPath: "standardProfilePicStoragePath", status: "")
-                
+                let usr = User(id: user.user.uid, username: withName, mail: email)
+                                
                 usr.save {
                     completion(usr)
                 }
