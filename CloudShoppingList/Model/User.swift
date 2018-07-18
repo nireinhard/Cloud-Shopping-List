@@ -15,12 +15,17 @@ enum UpdateStatus{
     case initialWrite, update
 }
 
+struct ListRepresentation{
+    let listId: String
+    let listName: String
+}
+
 class User{
     var id: String
     var username: String
     var mail: String
     var mode: String?
-    var lists: [ShoppingList]?
+    var lists: [ListRepresentation]?
     
     init(id: String, username: String, mail: String){
         self.id = id
@@ -89,10 +94,16 @@ extension User{
     }
     
     private func getListJson() -> [String:Any]{
-        let listJson: [String:Any] = [
-            "3245632": true,
-            "6542112": true
-        ]
+        var listJson: [String:Any] = [:]
+        
+        let mockList = ListRepresentation(listId: "45353452", listName: "Neuer Code Test")
+        let mockList2 = ListRepresentation(listId: "3267634", listName: "Wochenendeinkauf")
+        let mockLists = [mockList, mockList2]
+
+        for list in mockLists{
+            listJson[list.listId] = ["listId": list.listId, "title": list.listName]
+        }
+        
         return listJson
     }
     

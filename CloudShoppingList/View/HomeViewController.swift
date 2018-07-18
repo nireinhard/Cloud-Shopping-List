@@ -15,8 +15,8 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
-    let shoppingLists = FUIArray(query: Database.database().reference().child("lists").child(Me.uid).child("joined"))
-    var listForSegue: ShoppingList?
+    let shoppingLists = FUIArray(query: Database.database().reference().child("users").child(Me.uid).child("lists"))
+    var listForSegue: ListRepresentation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +30,7 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
     }
     
     private func setupData(){
-        var shoppingLists = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("lists").observe(.value) { (snapshot) in
-            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-            print(postDict)
-        }
+
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -50,11 +47,9 @@ extension HomeViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ShoppingListTableViewCell
         let info = JSON((shoppingLists[(UInt(indexPath.row))] as? DataSnapshot)?.value as Any).dictionaryValue
         
-        print(info)
+        let list = ListRepresentation(listId: (info["listId"]?.stringValue)!, listName: (info["title"]?.stringValue)!)
         
-        print(info["members"])
-        
-        cell.configure(for: ShoppingList(title: (info["name"]?.stringValue)!), delegate: self)
+        cell.configure(for: list, delegate: self)
         
         if let membercount = info["membercount"]?.intValue {
             cell.memberInfoTextField.text = formatMemberInfo(membercount: membercount)
@@ -82,7 +77,16 @@ extension HomeViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete){
-            // delete from db
+            let info = JSON((shoppingLists[(UInt(indexPath.row))] as? DataSnapshot)?.value as Any).dictionaryValue
+            let id = info["listId"]?.stringValue
+            if let id = id{
+                // delete from db
+                ShoppingList.deleteShoppingList(listId: id, completion: {
+                    
+                }) {
+                    
+                }
+            }
         }
     }
     
@@ -105,7 +109,7 @@ extension HomeViewController: ListCellDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailsSegue"{
             let destination = segue.destination as? DetailsViewController
-            destination?.shoppingList = listForSegue
+            destination?.listRepresentation = listForSegue
         }
     }
 }

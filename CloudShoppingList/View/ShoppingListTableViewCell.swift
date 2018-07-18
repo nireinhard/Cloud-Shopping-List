@@ -18,11 +18,11 @@ class ShoppingListTableViewCell: UITableViewCell {
     @IBOutlet weak var memberInfoTextField: UILabel!
     
     weak var delegate: ListCellDelegate?
-    var shoppingList: ShoppingList?
+    var shoppingList: ListRepresentation?
     
-    func configure(for shoppingList: ShoppingList, delegate: ListCellDelegate){
+    func configure(for shoppingList: ListRepresentation, delegate: ListCellDelegate){
         self.shoppingList = shoppingList
-        self.shoppingListNameTextField.text = shoppingList.title
+        self.shoppingListNameTextField.text = shoppingList.listName
         self.delegate = delegate
     }
     

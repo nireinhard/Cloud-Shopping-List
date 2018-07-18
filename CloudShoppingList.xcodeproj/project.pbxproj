@@ -44,6 +44,7 @@
 		435F36E520FBC50400586B13 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E420FBC50400586B13 /* ProfileViewController.swift */; };
 		435F36E720FBC79700586B13 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E620FBC79700586B13 /* ShareViewController.swift */; };
 		435F36E920FBC9DE00586B13 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E820FBC9DE00586B13 /* CreateViewController.swift */; };
+		435F36EB20FE2BC400586B13 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36EA20FE2BC400586B13 /* Item.swift */; };
 		CF2DEB915904A78BC87C5BF9 /* Pods_CloudShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		435F36E420FBC50400586B13 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		435F36E620FBC79700586B13 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		435F36E820FBC9DE00586B13 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
+		435F36EA20FE2BC400586B13 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,7 @@
 			children = (
 				435F36CE20FA89D500586B13 /* User.swift */,
 				435F36DE20FBAA1400586B13 /* ShoppingList.swift */,
+				435F36EA20FE2BC400586B13 /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				435F36E720FBC79700586B13 /* ShareViewController.swift in Sources */,
 				435F36CB20FA6A1C00586B13 /* AuthenticationController.swift in Sources */,
 				435F36E120FBAA3500586B13 /* ShoppingListController.swift in Sources */,
+				435F36EB20FE2BC400586B13 /* Item.swift in Sources */,
 				435F36D320FB8C1900586B13 /* RegisterViewController.swift in Sources */,
 				435F36C920FA670600586B13 /* UIUtility.swift in Sources */,
 				435F36A720FA604200586B13 /* LoginViewController.swift in Sources */,
@@ -589,7 +593,10 @@
 				DEVELOPMENT_TEAM = SFHGR93LDE;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = NiklasR.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -606,7 +613,10 @@
 				DEVELOPMENT_TEAM = SFHGR93LDE;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = NiklasR.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

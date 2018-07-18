@@ -15,17 +15,28 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var newItemTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    var shoppingList: ShoppingList?
+    var listRepresentation: ListRepresentation?
     var items: [String] = [String]()
+    var shoppingList: ShoppingList?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadList()
         setupUI()
         setupTable()
     }
     
     override func viewDidLayoutSubviews() {
         UIUtility.configureTextFields(textFields: [newItemTextField], borderColor: UIColor.darkGray.cgColor)
+    }
+    
+    private func loadList(){
+        if let list = listRepresentation{
+            //shoppingList = ShoppingList(listId: list.listId)
+            ShoppingList.loadShoppingList(listId: list.listId) { (list) in
+                
+            }
+        }
     }
     
     private func setupTable(){
@@ -37,9 +48,9 @@ class DetailsViewController: UIViewController {
     }
     
     private func setupUI(){
-        if let list = shoppingList{
-            shoppingListNameLabel.text = list.title
-            navigationItem.title = list.title
+        if let list = listRepresentation{
+            shoppingListNameLabel.text = list.listName
+            navigationItem.title = list.listName
         }
         // set back button color to white
         UINavigationBar.appearance().tintColor = .white

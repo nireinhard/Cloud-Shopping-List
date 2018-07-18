@@ -171,6 +171,9 @@
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="createListButtonTapped:" destination="Ict-Ag-K5d" eventType="touchUpInside" id="feV-fg-caZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -184,6 +187,7 @@
                         <viewLayoutGuide key="safeArea" id="hQH-yM-aRE"/>
                     </view>
                     <connections>
+                        <outlet property="createListButton" destination="X1t-XK-BOZ" id="CLF-7R-N8m"/>
                         <outlet property="newListTextField" destination="y8C-hC-XnO" id="mKa-yT-C6A"/>
                     </connections>
                 </viewController>
