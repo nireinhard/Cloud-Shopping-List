@@ -27,6 +27,15 @@ struct ShoppingList{
         self.content = content
     }
     
+    mutating func addItem(item: Item){
+        content.append(item)
+        persistContent()
+    }
+    
+    func persistContent(){
+       
+    }
+    
     static func createShoppingList(title: String, completion: @escaping ()->()){
         let newListJson: [String:Any] = [
             "content": [:],
@@ -97,11 +106,18 @@ struct ShoppingList{
         var items: [Item] = []
         
         if let content = content{
-            let status = content["status"]?.boolValue
-            let by = content["by"]?.stringValue
-            let text = content["text"]?.stringValue
-            let item = Item(text: text!, status: status!, by: by!)
-            items.append(item)
+            print(content)
+            for element in content{
+                print("element \(element)")
+                let status = element.value.dictionaryValue["status"]?.boolValue
+                let by = element.value.dictionaryValue["by"]?.stringValue
+                let text = element.value.dictionaryValue["text"]?.stringValue
+                
+                if let status = status, let by = by, let text = text{
+                    let item = Item(text: text, status: status, by: by)
+                    items.append(item)
+                }
+            }
         }
         
         print("all items: \(items)")
