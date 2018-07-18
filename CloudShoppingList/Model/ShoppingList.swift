@@ -18,12 +18,13 @@ struct ShoppingList{
     var createdAt: TimeInterval?
     var content: [Item] = []
     
-    init(listId: String, title: String, members: [String:Bool], initiator: String, createdAt: TimeInterval?){
+    init(listId: String, title: String, members: [String:Bool], initiator: String, createdAt: TimeInterval?, content: [Item]){
         self.listId = listId
         self.title = title
         self.members = members
         self.initiator = initiator
         self.createdAt = createdAt
+        self.content = content
     }
     
     static func createShoppingList(title: String, completion: @escaping ()->()){
@@ -54,7 +55,7 @@ struct ShoppingList{
     }
     
     static func deleteShoppingList(listId: String, completion: @escaping ()->(), fail: @escaping ()->()){
-        let list = ShoppingList.loadShoppingList(listId: listId) { (list) in
+        let list = ShoppingList.loadShoppingList(mode: .load, listId: listId) { (list) in
             if Me.uid == list.initiator{
                 // user is initiator -> delete list completely
                 // delete list in 'users' reference from every member
@@ -72,49 +73,76 @@ struct ShoppingList{
             }
         }
     }
-    
-    static func loadShoppingList(listId: String, completion: @escaping (ShoppingList)->()){
-        _ = FirebaseHelper.getRealtimeDB().child("lists").child(listId).observeSingleEvent(of: .value) { (snapshot) in
-            let data = JSON(snapshot.value).dictionaryValue
-            
-            var memberDictionary: [String:Bool] = [:]
-            
-            print("data: \(data)")
-            let initiator = data["initiator"]?.stringValue
-            let title = data["title"]?.stringValue
-            let content = data["content"]?.dictionaryValue
-            print("datacontent: \(content)")
-
-            let members = data["members"]?.dictionaryValue
-            if let members = members{
-                for member in members{
-                    memberDictionary[member.key] = member.value.boolValue
-                }
+ 
+    private static func createShoppingListFromJSON(listId: String, data: JSON) -> ShoppingList?{
+        let data = data.dictionaryValue
+        
+        var memberDictionary: [String:Bool] = [:]
+        
+        print("data: \(data)")
+        let initiator = data["initiator"]?.stringValue
+        let title = data["title"]?.stringValue
+        let content = data["content"]?.dictionaryValue
+        print("datacontent: \(content)")
+        
+        let members = data["members"]?.dictionaryValue
+        if let members = members{
+            for member in members{
+                memberDictionary[member.key] = member.value.boolValue
             }
-            
-            print("members: \(memberDictionary)")
-            
-            var items: [Item] = []
-            
-            if let content = content{
-                for item in content{
-                    let by = item.value.dictionaryValue["by"]?.stringValue
-                    let text = item.value.dictionaryValue["text"]?.stringValue
-                    let status = item.value.dictionaryValue["status"]?.boolValue
-                    let item = Item(text: text!, status: status!, by: by!)
-                    items.append(item)
-                    print("item \(item)")
-                }
-            }
-            print("all items: \(items)")
-            
-            if let title = title, let initiator = initiator{
-                let shoppingList = ShoppingList(listId: listId, title: title, members: memberDictionary, initiator: initiator, createdAt: nil)
-                completion(shoppingList)
-            }
-            
         }
+        
+        print("members: \(memberDictionary)")
+        
+        var items: [Item] = []
+        
+        if let content = content{
+            let status = content["status"]?.boolValue
+            let by = content["by"]?.stringValue
+            let text = content["text"]?.stringValue
+            let item = Item(text: text!, status: status!, by: by!)
+            items.append(item)
+        }
+        
+        print("all items: \(items)")
+        
+        if let title = title, let initiator = initiator{
+            let shoppingList = ShoppingList(listId: listId, title: title, members: memberDictionary, initiator: initiator, createdAt: nil, content: items)
+            return shoppingList
+        }
+        return nil
     }
+    
+    static func loadShoppingList(mode: WatchType = .subscribe,listId: String, completion: @escaping (ShoppingList)->()) -> DatabaseHandle? {
+        if mode == .subscribe{
+            let ref: DatabaseHandle = FirebaseHelper.getRealtimeDB().child("lists").child(listId).observe(.value) { (snapshot) in
+                // transform snapshot data to json
+                let data = JSON(snapshot.value)
+                // pass to function to create shopping list from it
+                let shoppingList = createShoppingListFromJSON(listId: listId, data: data)
+                if let shoppingList = shoppingList {
+                    completion(shoppingList)
+                }
+            }
+            return ref
+        }else if mode == .load{
+            FirebaseHelper.getRealtimeDB().child("lists").child(listId).observeSingleEvent(of: .value) { (snapshot) in
+                // transform snapshot data to json
+                let data = JSON(snapshot.value)
+                // pass to function to create shopping list from it
+                let shoppingList = createShoppingListFromJSON(listId: listId, data: data)
+                if let shoppingList = shoppingList {
+                    completion(shoppingList)
+                }
+            }
+            return nil
+        }
+        return nil
+    }
+}
+
+enum WatchType{
+    case subscribe, load
 }
 
 extension ShoppingList{

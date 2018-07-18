@@ -27,6 +27,7 @@ class CreateViewController: UIViewController {
         
         guard let listname = newListTextField.text, !listname.isEmpty else{
             NotificationUtility.showPrettyMessage(with: "Bitte gib einen Namen für den Einkaufszettel ein", button: "Ok", style: .error)
+            createListButton.isEnabled = true
             return
         }
         

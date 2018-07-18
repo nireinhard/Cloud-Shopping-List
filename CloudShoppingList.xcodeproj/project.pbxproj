@@ -45,6 +45,7 @@
 		435F36E720FBC79700586B13 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E620FBC79700586B13 /* ShareViewController.swift */; };
 		435F36E920FBC9DE00586B13 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36E820FBC9DE00586B13 /* CreateViewController.swift */; };
 		435F36EB20FE2BC400586B13 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36EA20FE2BC400586B13 /* Item.swift */; };
+		435F36ED20FF1FB900586B13 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36EC20FF1FB900586B13 /* ItemTableViewCell.swift */; };
 		CF2DEB915904A78BC87C5BF9 /* Pods_CloudShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		435F36E620FBC79700586B13 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		435F36E820FBC9DE00586B13 /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		435F36EA20FE2BC400586B13 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		435F36EC20FF1FB900586B13 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,6 +184,7 @@
 				435F36E420FBC50400586B13 /* ProfileViewController.swift */,
 				435F36E620FBC79700586B13 /* ShareViewController.swift */,
 				435F36E820FBC9DE00586B13 /* CreateViewController.swift */,
+				435F36EC20FF1FB900586B13 /* ItemTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				435F36D120FA8A1C00586B13 /* FirebaseHelper.swift in Sources */,
 				435F36E320FBACBC00586B13 /* DetailsViewController.swift in Sources */,
 				4313D34720D4610A00B93B11 /* AppDelegate.swift in Sources */,
+				435F36ED20FF1FB900586B13 /* ItemTableViewCell.swift in Sources */,
 				435F36CF20FA89D500586B13 /* User.swift in Sources */,
 				435F36C720FA64B200586B13 /* RoundedView.swift in Sources */,
 				435F36C520FA639500586B13 /* RoundedButton.swift in Sources */,

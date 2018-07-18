@@ -8,35 +8,54 @@
 
 import UIKit
 import DZNEmptyDataSet
+import FirebaseDatabase
+import FirebaseUI
+import SwiftyJSON
 
 class DetailsViewController: UIViewController {
 
     @IBOutlet weak var shoppingListNameLabel: UILabel!
     @IBOutlet weak var newItemTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    
     var listRepresentation: ListRepresentation?
-    var items: [String] = [String]()
     var shoppingList: ShoppingList?
+    var ref: UInt?
+    
+    deinit {
+        print("deinitalized details view controller")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadList()
+        ref = loadList()
         setupUI()
         setupTable()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if let ref = ref{
+            print("about to detach listener")
+            FirebaseHelper.detachListener(ref)
+        }
     }
     
     override func viewDidLayoutSubviews() {
         UIUtility.configureTextFields(textFields: [newItemTextField], borderColor: UIColor.darkGray.cgColor)
     }
     
-    private func loadList(){
+    private func loadList() -> UInt?{
         if let list = listRepresentation{
-            //shoppingList = ShoppingList(listId: list.listId)
-            ShoppingList.loadShoppingList(listId: list.listId) { (list) in
-                
+            // shoppingList = ShoppingList(listId: list.listId)
+            let ref = ShoppingList.loadShoppingList(mode: .subscribe, listId: list.listId) { [unowned self] (list) in
+                // shopping list loaded, attach content to table view
+                self.shoppingList = list
+                self.tableView.reloadData()
+                print(self.shoppingList?.content)
+                self.shoppingListNameLabel.text = list.title
             }
+            return ref
         }
+        return nil
     }
     
     private func setupTable(){
@@ -45,6 +64,7 @@ class DetailsViewController: UIViewController {
         self.tableView.emptyDataSetSource = self
         self.tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
+        self.tableView.rowHeight = 55
     }
     
     private func setupUI(){
@@ -63,19 +83,57 @@ class DetailsViewController: UIViewController {
 }
 
 extension DetailsViewController: UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
 }
 
 extension DetailsViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if let shoppingList = shoppingList{
+            return shoppingList.content.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UITableViewCell
-        return cell
+        if let shoppingList = shoppingList{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableViewCell
+            let item = shoppingList.content[indexPath.row]
+            cell.configure(for: item, delegate: self)
+            return cell
+        }
+        return UITableViewCell()
     }
 }
+
+extension DetailsViewController: ItemCellDelegate{
+    func buttonTapped(sender: ItemTableViewCell) {
+        
+    }
+}
+
+extension DetailsViewController{
+    func array(_ array: FUICollection, didAdd object: Any, at index: UInt) {
+        self.tableView.insertRows(at: [IndexPath(row: Int(index), section: 0)], with: .automatic)
+    }
+    
+    func array(_ array: FUICollection, didMove object: Any, from fromIndex: UInt, to toIndex: UInt) {
+        self.tableView.insertRows(at: [IndexPath(row: Int(toIndex), section: 0)], with: .automatic)
+        self.tableView.deleteRows(at: [IndexPath(row: Int(fromIndex), section: 0)], with: .automatic)
+        
+        
+    }
+    func array(_ array: FUICollection, didRemove object: Any, at index: UInt) {
+        self.tableView.deleteRows(at: [IndexPath(row: Int(index), section: 0)], with: .automatic)
+        
+        
+    }
+    func array(_ array: FUICollection, didChange object: Any, at index: UInt) {
+        self.tableView.reloadRows (at: [IndexPath(row: Int(index), section: 0)], with: .none)
+    }
+}
+
 
 extension DetailsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {

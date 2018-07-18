@@ -32,6 +32,11 @@ struct FirebaseHelper{
             return self.db!
         }
     }
+    
+    static func detachListener(_ listener: DatabaseHandle){
+        print("unsubscribed from \(listener)")
+        ref.removeObserver(withHandle: listener)
+    }
 }
 
 enum FirestoreData{
