@@ -29,11 +29,27 @@ struct ShoppingList{
     
     mutating func addItem(item: Item){
         content.append(item)
-        persistContent()
+        persistItem(item)
     }
     
-    func persistContent(){
-       
+    func persistItem(_ item: Item){
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").childByAutoId().updateChildValues(item.toDictionary())
+        
+        let contentJson: [String:Any] = [
+            :
+        ]
+        
+        let jsonRepresentation: [String] = []
+        
+        for item in content{
+            let json: [String:Any] = [
+                "by":item.by,
+                "text":item.text,
+                "status": item.status
+            ]
+            //jsonRepresentation.append(json)
+        }
+        
     }
     
     static func createShoppingList(title: String, completion: @escaping ()->()){
@@ -112,9 +128,10 @@ struct ShoppingList{
                 let status = element.value.dictionaryValue["status"]?.boolValue
                 let by = element.value.dictionaryValue["by"]?.stringValue
                 let text = element.value.dictionaryValue["text"]?.stringValue
+                let userId = element.value.dictionaryValue["userId"]?.stringValue
                 
-                if let status = status, let by = by, let text = text{
-                    let item = Item(text: text, status: status, by: by)
+                if let status = status, let by = by, let text = text, let userId = userId{
+                    let item = Item(text: text, status: status, by: by, userId: userId)
                     items.append(item)
                 }
             }

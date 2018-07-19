@@ -80,11 +80,45 @@ class DetailsViewController: UIViewController {
         performSegue(withIdentifier: "shareSegue", sender: nil)
     }
     
+    @IBAction func addItemButtonTapped(_ sender: RoundedButton) {
+        guard let itemText = newItemTextField.text, !itemText.isEmpty else{
+            NotificationUtility.showPrettyMessage(with: "Bitte gib einen Text für den Eintrag ein", button: "ok", style: .error)
+            return
+        }
+       
+        if var shoppingList = shoppingList{
+            Me.username { (username) in
+                if let username = username{
+                    let item = Item(text: itemText, status: false, by: username, userId: Me.uid)
+                    shoppingList.addItem(item: item)
+                    self.newItemTextField.text = ""
+                }
+            }
+        }
+        
+    }
+    
 }
 
 extension DetailsViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if let shoppingList = shoppingList{
+            return Me.uid == shoppingList.initiator
+        }
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete{
+            if var shoppingList = shoppingList{
+                shoppingList.content.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
+        }
     }
 }
 

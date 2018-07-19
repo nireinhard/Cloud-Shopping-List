@@ -25,13 +25,7 @@ enum UIUtility{
 }
 
 extension UIViewController{
-    
-    @objc func showingKeyboard(notification: Notification){
-        if let keyboardHeight = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height{
-            self.view.frame.origin.y = -keyboardHeight
-        }
-    }
-    
+        
     @objc func hidingKeyboard(){
         self.view.frame.origin.y = 0
     }

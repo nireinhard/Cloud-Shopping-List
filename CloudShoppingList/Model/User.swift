@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import CoreLocation
 import FirebaseFirestore
+import SwiftyJSON
 
 enum UpdateStatus{
     case initialWrite, update
@@ -20,7 +21,7 @@ struct ListRepresentation{
     let listName: String
 }
 
-class User{
+struct User{
     var id: String
     var username: String
     var mail: String
@@ -34,15 +35,51 @@ class User{
         self.lists = []
     }
     
-    init(userId: String, data: Dictionary<String, Any>){
-        self.id = userId
-        self.username = data["username"] as! String
-        self.mail = data["mail"] as! String
-        self.lists = []
+    init(id: String, username: String, mail: String, lists: [ListRepresentation]){
+        self.init(id: id, username: username, mail: mail)
+        self.lists = lists
     }
     
-    static func retrieveUser(userId: String, completion: @escaping (User?)->()){
+    private static func createUserFromJSON(userId: String, data: JSON) -> User?{
+        let data = data.dictionaryValue
+        let metadata = data["metadata"]?.dictionaryValue
+        let listdata = data["lists"]?.dictionaryValue
+       
+        guard let meta = metadata, let list = listdata else {
+            return nil
+        }
+
+        let username = meta["username"]?.stringValue
+        let mail = meta["mail"]?.stringValue
         
+        var lists: [ListRepresentation] = []
+        
+        for listitem in list{
+            let listitemDictionary = listitem.value.dictionaryValue
+            let listId = listitemDictionary["listId"]?.stringValue
+            let title = listitemDictionary["title"]?.stringValue
+            if let listId = listId, let title = title{
+                let listRepresentation = ListRepresentation(listId: listId, listName: title)
+                lists.append(listRepresentation)
+            }
+        }
+        
+        let user: User = User(id: Me.uid, username: username!, mail: mail!, lists: lists)
+        
+        return user
+    }
+    
+    static func loadUser(userId: String, completion: @escaping (User?)->(), fail: @escaping ()->()){
+        let userRef = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid)
+        userRef.observeSingleEvent(of: .value) { (snapshot) in
+            let data = JSON(snapshot.value)
+            let user = createUserFromJSON(userId: userId, data: data)
+            if let user = user{
+                completion(user)
+            }else{
+                fail()
+            }
+        }
     }
     
     static func retrieveUserListener(userId: String, completion: @escaping (User?) -> ()) -> ListenerRegistration?{
