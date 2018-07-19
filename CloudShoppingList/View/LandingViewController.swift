@@ -16,7 +16,7 @@ enum ViewControllerType {
 class LandingViewController: UIViewController {
     
     //MARK: Push to relevant ViewController
-    func pushTo(viewController: ViewControllerType)  {
+    private func pushTo(viewController: ViewControllerType)  {
         switch viewController {
         case .home:
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "homeViewController") as! TabViewController

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		430B36E421010580005EADCF /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E321010580005EADCF /* InviteTableViewCell.swift */; };
+		430B36E621010658005EADCF /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E521010658005EADCF /* ShareController.swift */; };
+		430B36E821011A85005EADCF /* NotificationListenerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E721011A85005EADCF /* NotificationListenerController.swift */; };
+		430B36EA2101293B005EADCF /* NotificationInvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E92101293B005EADCF /* NotificationInvitationTableViewCell.swift */; };
 		4313D34720D4610A00B93B11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4313D34620D4610A00B93B11 /* AppDelegate.swift */; };
 		4313D34920D4610A00B93B11 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4313D34820D4610A00B93B11 /* HomeViewController.swift */; };
 		4313D34C20D4610A00B93B11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4313D34A20D4610A00B93B11 /* Main.storyboard */; };
@@ -52,6 +56,10 @@
 
 /* Begin PBXFileReference section */
 		3874D6B081102F9B10EDC382 /* Pods-CloudShoppingList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.debug.xcconfig"; sourceTree = "<group>"; };
+		430B36E321010580005EADCF /* InviteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
+		430B36E521010658005EADCF /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
+		430B36E721011A85005EADCF /* NotificationListenerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListenerController.swift; sourceTree = "<group>"; };
+		430B36E92101293B005EADCF /* NotificationInvitationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInvitationTableViewCell.swift; sourceTree = "<group>"; };
 		4313D34320D4610A00B93B11 /* CloudShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4313D34620D4610A00B93B11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4313D34820D4610A00B93B11 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				435F36CA20FA6A1C00586B13 /* AuthenticationController.swift */,
+				430B36E521010658005EADCF /* ShareController.swift */,
+				430B36E721011A85005EADCF /* NotificationListenerController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,6 +198,8 @@
 				435F36E820FBC9DE00586B13 /* CreateViewController.swift */,
 				435F36EC20FF1FB900586B13 /* ItemTableViewCell.swift */,
 				435F36F021007C3600586B13 /* NotificationsViewController.swift */,
+				430B36E321010580005EADCF /* InviteTableViewCell.swift */,
+				430B36E92101293B005EADCF /* NotificationInvitationTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -432,6 +444,7 @@
 				435F36DD20FB9E5700586B13 /* ShoppingListTableViewCell.swift in Sources */,
 				435F36DF20FBAA1400586B13 /* ShoppingList.swift in Sources */,
 				435F36E920FBC9DE00586B13 /* CreateViewController.swift in Sources */,
+				430B36E621010658005EADCF /* ShareController.swift in Sources */,
 				435F36EF21006FF000586B13 /* Notification.swift in Sources */,
 				435F36E720FBC79700586B13 /* ShareViewController.swift in Sources */,
 				435F36CB20FA6A1C00586B13 /* AuthenticationController.swift in Sources */,
@@ -447,12 +460,15 @@
 				435F36F121007C3600586B13 /* NotificationsViewController.swift in Sources */,
 				435F36E320FBACBC00586B13 /* DetailsViewController.swift in Sources */,
 				4313D34720D4610A00B93B11 /* AppDelegate.swift in Sources */,
+				430B36E421010580005EADCF /* InviteTableViewCell.swift in Sources */,
 				435F36ED20FF1FB900586B13 /* ItemTableViewCell.swift in Sources */,
 				435F36CF20FA89D500586B13 /* User.swift in Sources */,
 				435F36C720FA64B200586B13 /* RoundedView.swift in Sources */,
 				435F36C520FA639500586B13 /* RoundedButton.swift in Sources */,
+				430B36E821011A85005EADCF /* NotificationListenerController.swift in Sources */,
 				435F36D520FB931100586B13 /* LandingViewController.swift in Sources */,
 				435F36CD20FA6A6E00586B13 /* NotificationUtility.swift in Sources */,
+				430B36EA2101293B005EADCF /* NotificationInvitationTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

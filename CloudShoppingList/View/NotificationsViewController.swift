@@ -12,10 +12,12 @@ import DZNEmptyDataSet
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
+        NotificationListenerController.shared.listener = self
     }
     
     private func setupTable(){
@@ -24,20 +26,35 @@ class NotificationsViewController: UIViewController {
         tableView.emptyDataSetSource = self
         tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
+        self.tableView.rowHeight = 75
+    }
+}
+
+extension NotificationsViewController: NotificationListener{
+    func update() {
+        tableView.reloadData()
+        self.navigationController?.tabBarItem.badgeValue = String(NotificationListenerController.shared.notifications.count)
     }
 }
 
 extension NotificationsViewController: UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
 }
 
 extension NotificationsViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return NotificationListenerController.shared.notifications.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "notificationcell", for: indexPath) as! NotificationInvitationTableViewCell
+        let invitation = NotificationListenerController.shared.notifications[indexPath.row]
+        
+        cell.configure(notification: invitation)
+
+        return cell
     }
 }
 

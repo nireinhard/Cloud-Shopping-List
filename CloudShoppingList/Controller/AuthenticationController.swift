@@ -85,6 +85,7 @@ struct AuthenticationController{
     static func logOutUser(completion: @escaping (Bool) -> Swift.Void) {
         do {
             try Auth.auth().signOut()
+            NotificationListenerController.shared.stopListening()
             UserDefaults.standard.removeObject(forKey: "userInformation")
             completion(true)
         } catch _ {

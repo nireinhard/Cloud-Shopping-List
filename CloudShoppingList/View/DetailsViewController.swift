@@ -80,6 +80,15 @@ class DetailsViewController: UIViewController {
         performSegue(withIdentifier: "shareSegue", sender: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "shareSegue"{
+            let destination = segue.destination as? ShareViewController
+            if let shoppingList = self.shoppingList{
+                destination?.list = shoppingList
+            }
+        }
+    }
+    
     @IBAction func addItemButtonTapped(_ sender: RoundedButton) {
         guard let itemText = newItemTextField.text, !itemText.isEmpty else{
             NotificationUtility.showPrettyMessage(with: "Bitte gib einen Text für den Eintrag ein", button: "ok", style: .error)

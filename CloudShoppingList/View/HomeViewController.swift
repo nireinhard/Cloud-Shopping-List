@@ -27,6 +27,7 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
         self.tableView.rowHeight = 75
         tableView.tableFooterView = UIView()
         setupData()
+        NotificationListenerController.shared.startListening()
     }
     
     private func setupData(){

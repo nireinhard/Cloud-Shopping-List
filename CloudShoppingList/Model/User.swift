@@ -64,9 +64,31 @@ struct User{
             }
         }
         
-        let user: User = User(id: Me.uid, username: username!, mail: mail!, lists: lists)
+        let user: User = User(id: userId, username: username!, mail: mail!, lists: lists)
         
         return user
+    }
+    
+    static func loadAllUsers(completion: @escaping ([User])->(), fail: @escaping ()->()){
+         FirebaseHelper.getRealtimeDB().child("users").observeSingleEvent(of: .value) { (snapshot) in
+            let allUserData = JSON(snapshot.value).dictionaryValue
+            
+            var userList: [User] = []
+            
+            for elem in allUserData{
+                let userId = elem.key
+                let data = elem.value
+                let user = createUserFromJSON(userId: userId, data: data)
+                if let user = user{
+                    //exclude current user
+                    if userId != Me.uid{
+                        userList.append(user)
+                    }
+                }
+            }
+            
+            completion(userList)
+        }
     }
     
     static func loadUser(userId: String, completion: @escaping (User?)->(), fail: @escaping ()->()){
@@ -132,15 +154,6 @@ extension User{
     
     private func getListJson() -> [String:Any]{
         var listJson: [String:Any] = [:]
-        
-        let mockList = ListRepresentation(listId: "45353452", listName: "Neuer Code Test")
-        let mockList2 = ListRepresentation(listId: "3267634", listName: "Wochenendeinkauf")
-        let mockLists = [mockList, mockList2]
-
-        for list in mockLists{
-            listJson[list.listId] = ["listId": list.listId, "title": list.listName]
-        }
-        
         return listJson
     }
     

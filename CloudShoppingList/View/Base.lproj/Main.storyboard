@@ -480,17 +480,118 @@
                                     <constraint firstItem="JFY-4Q-Nfh" firstAttribute="centerX" secondItem="LxM-0F-oy6" secondAttribute="centerX" id="nOt-wm-2Be"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Benutzername" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vo9-Hr-AeZ">
+                                <rect key="frame" x="16" y="180" width="257" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="BNp-DZ-V2U"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="0.111818932" green="0.11183650050000001" blue="0.1118125319" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pi-Vj-EXA" customClass="RoundedButton" customModule="CloudShoppingList" customModuleProvider="target">
+                                <rect key="frame" x="289" y="180" width="70" height="45"/>
+                                <color key="backgroundColor" red="0.4039215686" green="0.81960784310000001" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="Bzd-Dr-zWE"/>
+                                    <constraint firstAttribute="height" constant="45" id="bo9-K1-das"/>
+                                </constraints>
+                                <state key="normal" title="Suchen">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="createListButtonTapped:" destination="Ict-Ag-K5d" eventType="touchUpInside" id="ExD-hg-7sv"/>
+                                    <action selector="searchButtonTapped:" destination="OnS-De-Hfu" eventType="touchUpInside" id="URK-W1-RxU"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8uk-rR-mOH">
+                                <rect key="frame" x="0.0" y="241" width="375" height="377"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="75" id="8K9-N5-eWc" customClass="InviteTableViewCell" customModule="CloudShoppingList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8K9-N5-eWc" id="I50-7x-s3S">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBp-eh-r0M">
+                                                    <rect key="frame" x="15" y="27" width="257" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vn9-VH-t8T">
+                                                    <rect key="frame" x="280" y="23" width="80" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="1ZS-YR-d0Q"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Einladen">
+                                                        <color key="titleColor" red="0.4039215686" green="0.81960784310000001" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="inviteButtonTapped:" destination="8K9-N5-eWc" eventType="touchUpInside" id="Ogf-NC-1Qw"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfT-fB-Q0P">
+                                                    <rect key="frame" x="18" y="52" width="33" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.42745098040000001" green="0.47450980390000003" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vn9-VH-t8T" firstAttribute="leading" secondItem="uBp-eh-r0M" secondAttribute="trailing" constant="8" id="14t-DJ-5f5"/>
+                                                <constraint firstItem="uBp-eh-r0M" firstAttribute="leading" secondItem="I50-7x-s3S" secondAttribute="leadingMargin" id="5QK-bH-6gp"/>
+                                                <constraint firstItem="VfT-fB-Q0P" firstAttribute="top" secondItem="uBp-eh-r0M" secondAttribute="bottom" constant="4" id="8oq-Vn-gPR"/>
+                                                <constraint firstItem="uBp-eh-r0M" firstAttribute="top" secondItem="I50-7x-s3S" secondAttribute="topMargin" constant="16" id="EXJ-TE-FU2"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vn9-VH-t8T" secondAttribute="trailing" id="P4H-if-WKy"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vn9-VH-t8T" secondAttribute="bottom" constant="12" id="PfS-Np-JS5"/>
+                                                <constraint firstItem="VfT-fB-Q0P" firstAttribute="leading" secondItem="I50-7x-s3S" secondAttribute="leading" constant="18" id="Q1A-UZ-fP3"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uBp-eh-r0M" secondAttribute="bottom" constant="16" id="dDJ-Oo-LqJ"/>
+                                                <constraint firstItem="vn9-VH-t8T" firstAttribute="top" secondItem="I50-7x-s3S" secondAttribute="topMargin" constant="12" id="sbc-RU-Wh4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="alreadyInvitedLabel" destination="VfT-fB-Q0P" id="K2W-VC-52M"/>
+                                            <outlet property="inviteButton" destination="vn9-VH-t8T" id="HZs-4f-npJ"/>
+                                            <outlet property="usernameLabel" destination="uBp-eh-r0M" id="TO7-2O-HbG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="dlf-7r-edd" firstAttribute="trailing" secondItem="0Pi-Vj-EXA" secondAttribute="trailing" constant="16" id="ABG-Rf-lZd"/>
+                            <constraint firstItem="8uk-rR-mOH" firstAttribute="leading" secondItem="dlf-7r-edd" secondAttribute="leading" id="AvL-tR-qq4"/>
                             <constraint firstItem="LxM-0F-oy6" firstAttribute="trailing" secondItem="dlf-7r-edd" secondAttribute="trailing" id="N7R-vI-vzb"/>
+                            <constraint firstItem="8uk-rR-mOH" firstAttribute="trailing" secondItem="dlf-7r-edd" secondAttribute="trailing" id="PGJ-VM-UPC"/>
+                            <constraint firstItem="0Pi-Vj-EXA" firstAttribute="leading" secondItem="vo9-Hr-AeZ" secondAttribute="trailing" constant="16" id="VZT-dZ-fk7"/>
+                            <constraint firstItem="8uk-rR-mOH" firstAttribute="top" secondItem="vo9-Hr-AeZ" secondAttribute="bottom" constant="16" id="Wx0-RZ-SxL"/>
                             <constraint firstItem="LxM-0F-oy6" firstAttribute="top" secondItem="dlf-7r-edd" secondAttribute="top" id="df3-yT-VEr"/>
+                            <constraint firstItem="0Pi-Vj-EXA" firstAttribute="top" secondItem="LxM-0F-oy6" secondAttribute="bottom" constant="16" id="ibs-7e-jUR"/>
                             <constraint firstItem="LxM-0F-oy6" firstAttribute="leading" secondItem="dlf-7r-edd" secondAttribute="leading" id="j0R-Q0-L2S"/>
+                            <constraint firstItem="8uk-rR-mOH" firstAttribute="bottom" secondItem="dlf-7r-edd" secondAttribute="bottom" id="jId-KF-Wk6"/>
+                            <constraint firstItem="vo9-Hr-AeZ" firstAttribute="leading" secondItem="dlf-7r-edd" secondAttribute="leading" constant="16" id="qzw-M7-iLS"/>
+                            <constraint firstItem="vo9-Hr-AeZ" firstAttribute="top" secondItem="LxM-0F-oy6" secondAttribute="bottom" constant="16" id="ztj-Yw-624"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dlf-7r-edd"/>
                     </view>
                     <connections>
                         <outlet property="shareLinkLabel" destination="JFY-4Q-Nfh" id="Hnf-3w-9c6"/>
+                        <outlet property="tableView" destination="8uk-rR-mOH" id="m6a-Db-uRb"/>
+                        <outlet property="usernameTextField" destination="vo9-Hr-AeZ" id="DR8-WN-SjY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4l-hK-OI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -662,7 +763,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationcell" rowHeight="75" id="HI0-oW-dKj">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationcell" rowHeight="75" id="HI0-oW-dKj" customClass="NotificationInvitationTableViewCell" customModule="CloudShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HI0-oW-dKj" id="DC5-zd-XLB">
@@ -699,17 +800,29 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BO0-dX-GYw">
+                                                    <rect key="frame" x="326" y="50.5" width="33" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.72853387850467288" green="0.72853387850467288" blue="0.72853387850467288" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="BO0-dX-GYw" secondAttribute="bottom" constant="8" id="4sE-h7-6Ul"/>
                                                 <constraint firstItem="WfJ-Ob-ae6" firstAttribute="leading" secondItem="CRp-MG-kuc" secondAttribute="trailing" constant="16" id="4tF-sr-PCc"/>
                                                 <constraint firstItem="CRp-MG-kuc" firstAttribute="top" secondItem="nAp-Le-2L8" secondAttribute="bottom" constant="8" id="8Y2-4Y-9ax"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="nAp-Le-2L8" secondAttribute="trailing" id="9PC-Nw-nDu"/>
+                                                <constraint firstAttribute="trailing" secondItem="BO0-dX-GYw" secondAttribute="trailing" constant="16" id="BcS-vW-coZ"/>
                                                 <constraint firstItem="nAp-Le-2L8" firstAttribute="leading" secondItem="DC5-zd-XLB" secondAttribute="leadingMargin" id="S11-86-cYu"/>
                                                 <constraint firstItem="CRp-MG-kuc" firstAttribute="leading" secondItem="DC5-zd-XLB" secondAttribute="leading" constant="16" id="s75-0r-Vku"/>
                                                 <constraint firstItem="WfJ-Ob-ae6" firstAttribute="top" secondItem="nAp-Le-2L8" secondAttribute="bottom" constant="8" id="u0Z-5S-HzG"/>
                                                 <constraint firstItem="nAp-Le-2L8" firstAttribute="top" secondItem="DC5-zd-XLB" secondAttribute="topMargin" id="z64-nU-Vbk"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="BO0-dX-GYw" id="trS-5C-rpj"/>
+                                            <outlet property="messageLabel" destination="nAp-Le-2L8" id="Hxz-sI-T7h"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
