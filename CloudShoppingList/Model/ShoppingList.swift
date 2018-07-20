@@ -32,24 +32,17 @@ struct ShoppingList{
         persistItem(item)
     }
     
-    func persistItem(_ item: Item){
+    mutating func addMember(userId: String){
+        members[userId] = false
+        persistMember(userId: userId)
+    }
+    
+    private func persistItem(_ item: Item){
         FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").childByAutoId().updateChildValues(item.toDictionary())
-        
-        let contentJson: [String:Any] = [
-            :
-        ]
-        
-        let jsonRepresentation: [String] = []
-        
-        for item in content{
-            let json: [String:Any] = [
-                "by":item.by,
-                "text":item.text,
-                "status": item.status
-            ]
-            //jsonRepresentation.append(json)
-        }
-        
+    }
+    
+    private func persistMember(userId: String){
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("members").updateChildValues([userId: false])
     }
     
     static func createShoppingList(title: String, completion: @escaping ()->()){
@@ -111,6 +104,7 @@ struct ShoppingList{
         print("datacontent: \(content)")
         
         let members = data["members"]?.dictionaryValue
+        
         if let members = members{
             for member in members{
                 memberDictionary[member.key] = member.value.boolValue

@@ -24,13 +24,23 @@ class NotificationListenerController{
         }
     }
     var ref: DatabaseHandle?
+    var listening = false
     
     private init(){
     }
     
-    func startListening(){
+    func removeNotification(notification: Notification){
+        FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("notifications").child(notification.notificationId).setValue(nil)
+    }
+    
+    func startListening(completion: @escaping()->()){
+        if listening{
+            return
+        }
+        
         print("started listening for notifications")
         ref = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("notifications").observe(.value) { (snapshot) in
+            self.listening = true
             self.notifications.removeAll()
             let data = JSON(snapshot.value).dictionaryValue
             
@@ -44,6 +54,7 @@ class NotificationListenerController{
                 if let type = type, let message = message, let date = date, let listId = listId{
                     let notification = Notification.init(notificationId: notificationId, type: type, message: message, date: date, listId: listId)
                     self.notifications.append(notification)
+                    completion()
                 }
             }
             

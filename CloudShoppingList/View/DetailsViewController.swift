@@ -17,6 +17,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var shoppingListNameLabel: UILabel!
     @IBOutlet weak var newItemTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var settingsLabel: UIImageView!
+    
     var listRepresentation: ListRepresentation?
     var shoppingList: ShoppingList?
     var ref: UInt?
@@ -71,6 +73,11 @@ class DetailsViewController: UIViewController {
         if let list = listRepresentation{
             shoppingListNameLabel.text = list.listName
             navigationItem.title = list.listName
+        }
+        if let list = shoppingList{
+            if list.initiator != Me.uid{
+                settingsLabel.isHidden = true
+            }
         }
         // set back button color to white
         UINavigationBar.appearance().tintColor = .white

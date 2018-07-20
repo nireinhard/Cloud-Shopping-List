@@ -12,7 +12,11 @@ class TabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NotificationListenerController.shared.startListening {
+            if NotificationListenerController.shared.notifications.count != 0{
+             self.tabBar.items?[1].badgeValue = "\(NotificationListenerController.shared.notifications.count)"
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

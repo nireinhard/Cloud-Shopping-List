@@ -33,21 +33,14 @@ class InviteTableViewCell: UITableViewCell {
         self.user = user
         self.delegate = delegate
         usernameLabel.text = user.username
-        if let userlists = user.lists{
-            inviteButton.isHidden = false
-            alreadyInvitedLabel.isHidden = true
-            
-            print("userlists: \(userlists)")
-            
-            for userlist in userlists{
-                if userlist.listId == list.listId{
-                    inviteButton.isHidden = true
-                    alreadyInvitedLabel.isHidden = false
-                    alreadyInvitedLabel.text = "Bereits eingeladen"
-                    break
-                }
-            }
+        
+        if let member = list.members[user.id] {
+            inviteButton.isHidden = true
+            inviteButton.isEnabled = false
+            alreadyInvitedLabel.isHidden = false
+            alreadyInvitedLabel.text = "Bereits eingeladen"
         }
+        
     }
     
     @IBAction func inviteButtonTapped(_ sender: UIButton) {

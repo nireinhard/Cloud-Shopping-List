@@ -33,7 +33,9 @@ class NotificationsViewController: UIViewController {
 extension NotificationsViewController: NotificationListener{
     func update() {
         tableView.reloadData()
-        self.navigationController?.tabBarItem.badgeValue = String(NotificationListenerController.shared.notifications.count)
+        if NotificationListenerController.shared.notifications.count != 0{
+            self.navigationController?.tabBarItem.badgeValue = "\(NotificationListenerController.shared.notifications.count)"
+        }
     }
 }
 
@@ -52,10 +54,36 @@ extension NotificationsViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "notificationcell", for: indexPath) as! NotificationInvitationTableViewCell
         let invitation = NotificationListenerController.shared.notifications[indexPath.row]
         
-        cell.configure(notification: invitation)
+        cell.configure(notification: invitation, delegate: self)
 
         return cell
     }
+}
+
+extension NotificationsViewController: InvitationActionDelegate{
+    func acceptedTapped(notification: Notification) {
+        print("accepted tapped")
+        // in 'lists' set user to true
+        FirebaseHelper.getRealtimeDB().child("lists").child(notification.listId).child("members").child(Me.uid).setValue(true)
+        
+        ShoppingList.loadShoppingList(listId: notification.listId) { (list) in
+            let newListRepresentationJson: [String:Any] = [
+                "title": list.title,
+                "listId": list.listId
+            ]
+            FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("lists").child(list.listId).setValue(newListRepresentationJson)
+        }
+        // remove notification
+        NotificationListenerController.shared.removeNotification(notification: notification)
+    }
+    
+    func declinedTapped(notification: Notification) {
+        // remove user from 'lists' member
+        FirebaseHelper.getRealtimeDB().child("lists").child(notification.listId).child("members").child(Me.uid).setValue(nil)
+        // remove notification
+         NotificationListenerController.shared.removeNotification(notification: notification)
+    }
+        
 }
 
 extension NotificationsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{

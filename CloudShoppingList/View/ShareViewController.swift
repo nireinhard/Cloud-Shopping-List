@@ -23,6 +23,9 @@ class ShareViewController: UIViewController {
         generateShareLink()
         setupTable()
         loadAllUsers()
+    }
+    
+    override func viewDidLayoutSubviews() {
         UIUtility.configureTextFields(textFields: [usernameTextField])
     }
     
@@ -83,9 +86,7 @@ extension ShareViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! InviteTableViewCell
         let user = result[indexPath.row]
-        //if let list = list{
-            cell.configure(for: user, list: list!, delegate: self)
-        //}
+        cell.configure(for: user, list: list!, delegate: self)
         return cell
     }
 }
@@ -99,8 +100,9 @@ extension ShareViewController: InviteCellDelegate{
     
     func inviteUser(_ receiverUser: User){
         User.loadUser(userId: Me.uid, completion: { (user) in
-            if let senderUser = user, let list = self.list{
+            if let senderUser = user, var list = self.list{
                 Notification.sendInvitationNotification(from: senderUser, to: receiverUser, list: list)
+                list.addMember(userId: receiverUser.id)
                 NotificationUtility.showPrettyMessage(with: "Deine Einladung wurde versendet", button: "ok", style: .success)
                 self.refreshView()
             }

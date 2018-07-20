@@ -8,25 +8,43 @@
 
 import UIKit
 
+protocol InvitationActionDelegate: AnyObject{
+    func acceptedTapped(notification: Notification)
+    func declinedTapped(notification: Notification)
+}
+
 class NotificationInvitationTableViewCell: UITableViewCell {
 
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
+    var notification: Notification?
+    weak var delegate: InvitationActionDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func configure(notification: Notification){
+    func configure(notification: Notification, delegate: InvitationActionDelegate){
+        self.notification = notification
+        self.delegate = delegate
         messageLabel.text = notification.message
-        
     }
-
+    
+    @IBAction func acceptButtonTapped(_ sender: RoundedButton) {
+        if let notification = notification{
+             delegate?.acceptedTapped(notification: notification)
+        }
+    }
+    
+    @IBAction func declineBUuttonTapped(_ sender: RoundedButton) {
+        if let notification = notification{
+            delegate?.declinedTapped(notification: notification)
+        }
+    }
+    
 }

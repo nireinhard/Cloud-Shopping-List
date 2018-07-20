@@ -447,6 +447,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="newItemTextField" destination="dUf-cS-O6W" id="DeK-ts-l3y"/>
+                        <outlet property="settingsLabel" destination="70o-32-1Pw" id="UC2-3p-Cui"/>
                         <outlet property="shoppingListNameLabel" destination="080-kV-dzH" id="bHe-z6-Dth"/>
                         <outlet property="tableView" destination="eDc-6L-wYr" id="Cub-yK-OvZ"/>
                     </connections>
@@ -787,6 +788,9 @@
                                                             <real key="value" value="4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="acceptButtonTapped:" destination="HI0-oW-dKj" eventType="touchUpInside" id="caC-EC-47v"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfJ-Ob-ae6" customClass="RoundedButton" customModule="CloudShoppingList" customModuleProvider="target">
                                                     <rect key="frame" x="97" y="40" width="58" height="28"/>
@@ -799,6 +803,9 @@
                                                             <real key="value" value="4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="declineBUuttonTapped:" destination="HI0-oW-dKj" eventType="touchUpInside" id="56b-Aq-M8r"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BO0-dX-GYw">
                                                     <rect key="frame" x="326" y="50.5" width="33" height="16"/>
