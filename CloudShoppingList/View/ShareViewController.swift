@@ -92,14 +92,14 @@ extension ShareViewController: UITableViewDataSource{
 
 extension ShareViewController: InviteCellDelegate{
     func buttonTapped(sender: InviteTableViewCell) {
-        if let senderUser = sender.user{
-            inviteUser(senderUser)
+        if let receiverUser = sender.user{
+            inviteUser(receiverUser)
         }
     }
     
-    func inviteUser(_ senderUser: User){
+    func inviteUser(_ receiverUser: User){
         User.loadUser(userId: Me.uid, completion: { (user) in
-            if let receiverUser = user, let list = self.list{
+            if let senderUser = user, let list = self.list{
                 Notification.sendInvitationNotification(from: senderUser, to: receiverUser, list: list)
                 NotificationUtility.showPrettyMessage(with: "Deine Einladung wurde versendet", button: "ok", style: .success)
                 self.refreshView()

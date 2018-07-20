@@ -32,7 +32,7 @@ struct Notification{
         self.listId = listId
     }
     
-    static func sendInvitationNotification(from receiverUser: User, to senderUser: User, list: ShoppingList){
+    static func sendInvitationNotification(from senderUser: User, to receiverUser: User, list: ShoppingList){
         let notificationData: [String:Any] = [
             "type": "invitation",
             "message": "\(senderUser.username) möchte dich zu \(list.title) einladen",
@@ -41,5 +41,11 @@ struct Notification{
         ]
         
         FirebaseHelper.getRealtimeDB().child("users").child(receiverUser.id).child("notifications").childByAutoId().updateChildValues(notificationData)
+    }
+    
+    static func getAllNotifcationsFor(userId: String){
+        FirebaseHelper.getRealtimeDB().child("users").child(userId).child("notifications").observeSingleEvent(of: .value) { (snapshot) in
+                
+        }
     }
 }

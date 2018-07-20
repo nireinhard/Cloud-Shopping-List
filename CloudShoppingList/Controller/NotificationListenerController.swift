@@ -31,6 +31,7 @@ class NotificationListenerController{
     func startListening(){
         print("started listening for notifications")
         ref = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("notifications").observe(.value) { (snapshot) in
+            self.notifications.removeAll()
             let data = JSON(snapshot.value).dictionaryValue
             
             for entry in data{

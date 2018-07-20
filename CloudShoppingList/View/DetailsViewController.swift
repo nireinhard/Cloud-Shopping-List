@@ -46,12 +46,12 @@ class DetailsViewController: UIViewController {
     private func loadList() -> UInt?{
         if let list = listRepresentation{
             // shoppingList = ShoppingList(listId: list.listId)
-            let ref = ShoppingList.loadShoppingList(mode: .subscribe, listId: list.listId) { [unowned self] (list) in
+            let ref = ShoppingList.loadShoppingList(mode: .subscribe, listId: list.listId) { [weak self] (list) in
                 // shopping list loaded, attach content to table view
-                self.shoppingList = list
-                self.tableView.reloadData()
-                print(self.shoppingList?.content)
-                self.shoppingListNameLabel.text = list.title
+                self?.shoppingList = list
+                self?.tableView.reloadData()
+                print(self?.shoppingList?.content)
+                self?.shoppingListNameLabel.text = list.title
             }
             return ref
         }
