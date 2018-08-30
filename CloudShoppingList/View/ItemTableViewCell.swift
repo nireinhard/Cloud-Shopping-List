@@ -20,15 +20,20 @@ class ItemTableViewCell: UITableViewCell {
     
     weak var delegate: ItemCellDelegate?
     
-    func configure(for item: Item, delegate: ItemCellDelegate){
+    func configure(for item: Item, with editStatus: Bool, delegate: ItemCellDelegate){
         itemTextLabel.text = item.text
         addedByLabel.text = item.by
         
-        if item.status{
-            checkIcon.isHidden = true
-            uncheckIcon.isHidden = false
+        if editStatus {
+            if item.status{
+                checkIcon.isHidden = true
+                uncheckIcon.isHidden = false
+            }else{
+                checkIcon.isHidden = false
+                uncheckIcon.isHidden = true
+            }
         }else{
-            checkIcon.isHidden = false
+            checkIcon.isHidden = true
             uncheckIcon.isHidden = true
         }
         

@@ -957,6 +957,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="createListButtonTapped:" destination="Ict-Ag-K5d" eventType="touchUpInside" id="gvk-uu-U8R"/>
+                                            <action selector="saveButtonTapped:" destination="TA6-2u-c7n" eventType="touchUpInside" id="uJu-p6-zaF"/>
                                             <action selector="searchButtonTapped:" destination="OnS-De-Hfu" eventType="touchUpInside" id="19Z-Bm-SzY"/>
                                         </connections>
                                     </button>
@@ -1025,6 +1026,7 @@
                     </view>
                     <connections>
                         <outlet property="listTitleTextField" destination="J2B-2T-3oW" id="V9u-KC-ZjC"/>
+                        <outlet property="shoppingListTitleTextField" destination="J2B-2T-3oW" id="HOp-iR-L80"/>
                         <outlet property="tableView" destination="6sR-yw-Y8m" id="dyi-qS-Xaw"/>
                     </connections>
                 </viewController>

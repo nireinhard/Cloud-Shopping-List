@@ -122,7 +122,7 @@ class DetailsViewController: UIViewController {
             Me.username { (username) in
                 if let username = username{
                     let item = Item(text: itemText, status: false, by: username, userId: Me.uid)
-                    shoppingList.addItem(item: item)
+                    shoppingList.addItem(item: item, userId: Me.uid)
                     self.newItemTextField.text = ""
                 }
             }
@@ -166,7 +166,8 @@ extension DetailsViewController: UITableViewDataSource{
         if let shoppingList = shoppingList{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableViewCell
             let item = shoppingList.content[indexPath.row]
-            cell.configure(for: item, delegate: self)
+            let editStatus = shoppingList.checkPrivilige(Me.uid)
+            cell.configure(for: item, with: editStatus, delegate: self)
             return cell
         }
         return UITableViewCell()

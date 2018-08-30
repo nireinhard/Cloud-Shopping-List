@@ -9,23 +9,19 @@
 import UIKit
 
 struct UserPrivilige{
-    let id: String
-    let canEdit: Bool
+    var id: String
+    var canEdit: Bool
 }
 
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var listTitleTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var shoppingListTitleTextField: UITextField!
     
     var shoppingList: ShoppingList! {
         didSet{
-            print("shopping list members")
-            print("_________________________________________")
-            print(Me.uid)
-            print(shoppingList.members)
-            print("_________________________________________")
-            shoppingList.members.sorted { $0.0.compare($1.0) == .orderedAscending }
+            shoppingList.priviliges.sorted { $0.0.compare($1.0) == .orderedAscending }
                 .forEach { if $0.key != Me.uid{ membersArray.append(UserPrivilige(id: $0.key, canEdit: $0.value)) }}
         }
     }
@@ -47,6 +43,18 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
     }
+    
+    @IBAction func saveButtonTapped(_ sender: RoundedButton) {
+        guard let newTitle = shoppingListTitleTextField.text else{
+            NotificationUtility.showPrettyMessage(with: "Bitte gib einen Namen für die Liste ein", button: "ok", style: .info)
+            return
+        }
+        
+        if var shoppingList = shoppingList {
+            shoppingList.changeTitle(newTitle: newTitle)
+        }
+    }
+    
 }
 
 extension SettingsViewController: UITableViewDelegate{
@@ -68,10 +76,10 @@ extension SettingsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingcell", for: indexPath) as! SettingTableViewCell
-        let user = membersArray[indexPath.row].id
+        let userId = membersArray[indexPath.row].id
         let status = membersArray[indexPath.row].canEdit
-        
-        cell.configure(for: user as! String, with: status as! Bool)
+  
+        cell.configure(for: userId as! String, and: shoppingList.listId, with: status as! Bool)
         
         return cell
     }

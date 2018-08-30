@@ -12,29 +12,38 @@ class SettingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var canEditSwitch: UISwitch!
     @IBOutlet weak var usernameLabel: UILabel!
-    var user: User?
+    var userId: String?
+    var shoppingListId: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func configure(for userId: String, with status: Bool){
+    func configure(for userId: String, and shoppingListId: String, with status: Bool){
+        self.userId = userId
+        self.shoppingListId = shoppingListId
         User.loadUser(userId: userId, completion: { (user) in
             if let user = user{
-             self.usernameLabel.text = user.username
-             self.canEditSwitch.isOn = status
+                self.usernameLabel.text = user.username
             }
-        }) { }
+        }) {}
+        self.canEditSwitch.isOn = status
+        
     }
 
     @IBAction func canEditSwitchChanged(_ sender: Any) {
-        
+        if let userId = userId, let shoppingListId = shoppingListId{
+            if canEditSwitch.isOn {
+                ShoppingList.changePrivilige(for: userId, on: shoppingListId, newStatus: false)
+                canEditSwitch.isOn = false
+            }else{
+                ShoppingList.changePrivilige(for: userId, on: shoppingListId, newStatus: true)
+                canEditSwitch.isOn = true
+            }
+        }
     }
 }

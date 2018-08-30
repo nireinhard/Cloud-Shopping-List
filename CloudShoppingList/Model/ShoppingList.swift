@@ -17,24 +17,40 @@ struct ShoppingList{
     var initiator: String
     var createdAt: TimeInterval?
     var content: [Item] = []
+    var priviliges: [String: Bool]
     
-    init(listId: String, title: String, members: [String:Bool], initiator: String, createdAt: TimeInterval?, content: [Item]){
+    init(listId: String, title: String, members: [String:Bool], initiator: String, createdAt: TimeInterval?, content: [Item], priviliges: [String:Bool]){
         self.listId = listId
         self.title = title
         self.members = members
         self.initiator = initiator
         self.createdAt = createdAt
         self.content = content
+        self.priviliges = priviliges
     }
     
-    mutating func addItem(item: Item){
-        content.append(item)
-        persistItem(item)
+    mutating func addItem(item: Item, userId: String){
+        if (checkPrivilige(userId)){
+            content.append(item)
+            persistItem(item)
+        }else{
+            NotificationUtility.showPrettyMessage(with: "Du hast keine Berechtigungen Positionen hinzuzufügen", button: "ok", style: .error)
+        }
     }
     
     mutating func addMember(userId: String){
         members[userId] = false
+        priviliges[userId] = false
         persistMember(userId: userId)
+    }
+    
+    mutating func changeTitle(newTitle: String){
+        self.title = newTitle
+        persistTitle()
+    }
+    
+    private func persistTitle(){
+            FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("title").setValue(self.title)
     }
     
     private func persistItem(_ item: Item){
@@ -43,6 +59,15 @@ struct ShoppingList{
     
     private func persistMember(userId: String){
         FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("members").updateChildValues([userId: false])
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("priviliges").updateChildValues([userId: false])
+    }
+    
+    public func checkPrivilige(_ userId: String) -> Bool{
+        return priviliges[userId] == true
+    }
+    
+    static func changePrivilige(for userId: String, on shoppingListId: String, newStatus: Bool){
+        FirebaseHelper.getRealtimeDB().child("lists").child(shoppingListId).child("priviliges").updateChildValues([userId: newStatus])
     }
     
     static func createShoppingList(title: String, completion: @escaping ()->()){
@@ -51,6 +76,7 @@ struct ShoppingList{
             "title": title,
             "initiator": Me.uid,
             "members": [Me.uid: true],
+            "priviliges": [Me.uid: true],
             "created": ServerValue.timestamp()
         ]
     FirebaseHelper.getRealtimeDB().child("lists").childByAutoId().setValue(newListJson) { (error, ref) in
@@ -87,6 +113,7 @@ struct ShoppingList{
                 // simply remove user from list and list from user
                 FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("lists").child(list.listId).setValue(nil)
                 FirebaseHelper.getRealtimeDB().child("lists").child(list.listId).child("members").child(Me.uid).setValue(nil)
+                FirebaseHelper.getRealtimeDB().child("lists").child(list.listId).child("priviliges").child(Me.uid).setValue(nil)
                 completion()
             }
         }
@@ -111,7 +138,17 @@ struct ShoppingList{
             }
         }
         
+        var priviligeDictionary: [String:Bool] = [:]
+        let priviliges = data["priviliges"]?.dictionaryValue
+        
+        if let priviliges = priviliges{
+            for member in priviliges{
+                priviligeDictionary[member.key] = member.value.boolValue
+            }
+        }
+        
         print("members: \(memberDictionary)")
+        print("priviliges: \(priviligeDictionary)")
         
         var items: [Item] = []
         
@@ -134,7 +171,7 @@ struct ShoppingList{
         print("all items: \(items)")
         
         if let title = title, let initiator = initiator{
-            let shoppingList = ShoppingList(listId: listId, title: title, members: memberDictionary, initiator: initiator, createdAt: nil, content: items)
+            let shoppingList = ShoppingList(listId: listId, title: title, members: memberDictionary, initiator: initiator, createdAt: nil, content: items, priviliges: priviligeDictionary)
             return shoppingList
         }
         return nil
