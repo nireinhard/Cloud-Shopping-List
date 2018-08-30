@@ -49,6 +49,22 @@ struct ShoppingList{
         persistTitle()
     }
     
+    mutating func checkItem(_ itemId: String){
+        var item = content.first { (item) -> Bool in
+            item.itemId == itemId
+        }
+        item?.status = true
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":true])
+    }
+    
+    mutating func uncheckItem(_ itemId: String){
+        var item = content.first { (item) -> Bool in
+            item.itemId == itemId
+        }
+        item?.status = false
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":false])
+    }
+    
     private func persistTitle(){
             FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("title").setValue(self.title)
     }
@@ -156,13 +172,14 @@ struct ShoppingList{
             print(content)
             for element in content{
                 print("element \(element)")
+                let itemId = element.key
                 let status = element.value.dictionaryValue["status"]?.boolValue
                 let by = element.value.dictionaryValue["by"]?.stringValue
                 let text = element.value.dictionaryValue["text"]?.stringValue
                 let userId = element.value.dictionaryValue["userId"]?.stringValue
                 
                 if let status = status, let by = by, let text = text, let userId = userId{
-                    let item = Item(text: text, status: status, by: by, userId: userId)
+                    let item = Item(itemId: itemId, text: text, status: status, by: by, userId: userId)
                     items.append(item)
                 }
             }

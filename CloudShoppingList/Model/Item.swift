@@ -9,10 +9,25 @@
 import Foundation
 
 struct Item{
+    var itemId: String
     var text: String
     var status: Bool
     var by: String
     var userId: String
+    
+    init(text: String, status: Bool, by: String, userId: String){
+        self.itemId = "-1"
+        self.text = text
+        self.status = status
+        self.by = by
+        self.userId = userId
+    }
+    
+    init(itemId: String, text: String, status: Bool, by: String, userId: String){
+        self.init(text: text, status: status, by: by, userId: userId)
+        self.itemId = itemId
+    }
+    
 }
 
 extension Item{

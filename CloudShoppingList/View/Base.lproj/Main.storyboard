@@ -300,7 +300,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eDc-6L-wYr">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eDc-6L-wYr">
                                 <rect key="frame" x="0.0" y="294" width="375" height="324"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -340,6 +340,32 @@
                                                         <constraint firstAttribute="width" constant="32" id="qMM-Wt-d7c"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvY-ox-RtS">
+                                                    <rect key="frame" x="328" y="11.5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="5v6-Pc-uun"/>
+                                                        <constraint firstAttribute="width" constant="32" id="TXG-2F-UTH"/>
+                                                    </constraints>
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="0.72853387849999995" green="0.72853387849999995" blue="0.72853387849999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="uncheckButtonTapped:" destination="HOB-aR-vyW" eventType="touchUpInside" id="pNV-XH-SFS"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxv-kZ-8jE">
+                                                    <rect key="frame" x="328" y="11.5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="gSI-98-BoK"/>
+                                                        <constraint firstAttribute="width" constant="32" id="mzk-4Y-J9O"/>
+                                                    </constraints>
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="0.72853387849999995" green="0.72853387849999995" blue="0.72853387849999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="checkButtonTapped:" destination="HOB-aR-vyW" eventType="touchUpInside" id="1rS-3u-vw3"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="RZS-RD-Lvw" firstAttribute="centerY" secondItem="p0H-cm-VfL" secondAttribute="centerY" id="1ke-24-r9d"/>
@@ -348,16 +374,22 @@
                                                 <constraint firstItem="SPW-Io-1Qr" firstAttribute="leading" secondItem="p0H-cm-VfL" secondAttribute="leading" constant="16" id="6wc-WZ-lRB"/>
                                                 <constraint firstItem="z7Y-zh-VaU" firstAttribute="centerY" secondItem="p0H-cm-VfL" secondAttribute="centerY" id="AY9-qD-kZ6"/>
                                                 <constraint firstItem="z7Y-zh-VaU" firstAttribute="trailing" secondItem="p0H-cm-VfL" secondAttribute="trailingMargin" id="Ah4-Sq-0lB"/>
+                                                <constraint firstAttribute="trailing" secondItem="cvY-ox-RtS" secondAttribute="trailing" constant="15" id="I1k-he-oFl"/>
+                                                <constraint firstItem="uxv-kZ-8jE" firstAttribute="centerY" secondItem="p0H-cm-VfL" secondAttribute="centerY" id="LQn-PM-YwF"/>
+                                                <constraint firstAttribute="trailing" secondItem="uxv-kZ-8jE" secondAttribute="trailing" constant="15" id="NXu-4Y-I0y"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GL0-kA-yM3" secondAttribute="trailing" constant="20" symbolic="YES" id="XfL-8r-pPd"/>
                                                 <constraint firstItem="RZS-RD-Lvw" firstAttribute="trailing" secondItem="p0H-cm-VfL" secondAttribute="trailingMargin" id="hvS-JL-3Di"/>
                                                 <constraint firstItem="GL0-kA-yM3" firstAttribute="top" secondItem="p0H-cm-VfL" secondAttribute="top" constant="8" id="iLm-01-lhx"/>
+                                                <constraint firstItem="cvY-ox-RtS" firstAttribute="centerY" secondItem="p0H-cm-VfL" secondAttribute="centerY" id="m0y-Ua-fBQ"/>
                                                 <constraint firstItem="SPW-Io-1Qr" firstAttribute="top" secondItem="GL0-kA-yM3" secondAttribute="bottom" constant="4" id="rW7-Kp-f9z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addedByLabel" destination="SPW-Io-1Qr" id="lwU-VK-9ef"/>
+                                            <outlet property="checkButton" destination="uxv-kZ-8jE" id="xOL-H4-qLE"/>
                                             <outlet property="checkIcon" destination="z7Y-zh-VaU" id="cGq-UM-Mdz"/>
                                             <outlet property="itemTextLabel" destination="GL0-kA-yM3" id="ke0-2k-EF6"/>
+                                            <outlet property="uncheckButton" destination="cvY-ox-RtS" id="3wR-3a-CpD"/>
                                             <outlet property="uncheckIcon" destination="RZS-RD-Lvw" id="r6H-fE-EUg"/>
                                         </connections>
                                     </tableViewCell>

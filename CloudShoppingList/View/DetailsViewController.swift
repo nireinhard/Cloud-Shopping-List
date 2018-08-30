@@ -167,7 +167,9 @@ extension DetailsViewController: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableViewCell
             let item = shoppingList.content[indexPath.row]
             let editStatus = shoppingList.checkPrivilige(Me.uid)
+            print("item: \(item)")
             cell.configure(for: item, with: editStatus, delegate: self)
+            cell.backgroundColor = item.status ? UIColor.green : UIColor.red
             return cell
         }
         return UITableViewCell()
@@ -175,8 +177,14 @@ extension DetailsViewController: UITableViewDataSource{
 }
 
 extension DetailsViewController: ItemCellDelegate{
-    func buttonTapped(sender: ItemTableViewCell) {
-        
+    func buttonTapped(sender: ItemTableViewCell, check: Bool, itemId: String) {
+        if var shoppingList = shoppingList{
+            if (check) {
+                shoppingList.checkItem(itemId)
+            }else {
+                shoppingList.uncheckItem(itemId)
+            }
+        }
     }
 }
 
