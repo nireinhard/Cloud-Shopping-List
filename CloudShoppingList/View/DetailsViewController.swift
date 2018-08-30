@@ -11,6 +11,7 @@ import DZNEmptyDataSet
 import FirebaseDatabase
 import FirebaseUI
 import SwiftyJSON
+import ChameleonFramework
 
 class DetailsViewController: UIViewController {
 
@@ -169,7 +170,7 @@ extension DetailsViewController: UITableViewDataSource{
             let editStatus = shoppingList.checkPrivilige(Me.uid)
             print("item: \(item)")
             cell.configure(for: item, with: editStatus, delegate: self)
-            cell.backgroundColor = item.status ? UIColor.green : UIColor.red
+            cell.backgroundColor = item.status ? UIColor.flatLime : UIColor.flatWatermelon
             return cell
         }
         return UITableViewCell()

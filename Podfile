@@ -22,4 +22,5 @@ target 'CloudShoppingList' do
   pod 'FirebaseUI/Database'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'DZNEmptyDataSet'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 end
