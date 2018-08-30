@@ -33,7 +33,7 @@ class InviteTableViewCell: UITableViewCell {
         self.user = user
         self.delegate = delegate
         usernameLabel.text = user.username
-        
+        alreadyInvitedLabel.isHidden = true
         if let member = list.members[user.id] {
             inviteButton.isHidden = true
             inviteButton.isEnabled = false

@@ -92,7 +92,7 @@ struct User{
     }
     
     static func loadUser(userId: String, completion: @escaping (User?)->(), fail: @escaping ()->()){
-        let userRef = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid)
+        let userRef = FirebaseHelper.getRealtimeDB().child("users").child(userId)
         userRef.observeSingleEvent(of: .value) { (snapshot) in
             let data = JSON(snapshot.value)
             let user = createUserFromJSON(userId: userId, data: data)

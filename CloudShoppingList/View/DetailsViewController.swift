@@ -18,9 +18,14 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var newItemTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var settingsLabel: UIImageView!
+    @IBOutlet weak var inviteButton: UIBarButtonItem!
     
     var listRepresentation: ListRepresentation?
-    var shoppingList: ShoppingList?
+    var shoppingList: ShoppingList? {
+        didSet{
+            setupUI()
+        }
+    }
     var ref: UInt?
     
     deinit {
@@ -77,6 +82,8 @@ class DetailsViewController: UIViewController {
         if let list = shoppingList{
             if list.initiator != Me.uid{
                 settingsLabel.isHidden = true
+                inviteButton.isEnabled = false
+                inviteButton.title = ""
             }
         }
         // set back button color to white
@@ -87,11 +94,20 @@ class DetailsViewController: UIViewController {
         performSegue(withIdentifier: "shareSegue", sender: nil)
     }
     
+    @IBAction func settingsButtonTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "settingsSegue", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "shareSegue"{
             let destination = segue.destination as? ShareViewController
             if let shoppingList = self.shoppingList{
                 destination?.list = shoppingList
+            }
+        }else if segue.identifier == "settingsSegue"{
+            let destination = segue.destination as? SettingsViewController
+            if let shoppingList = self.shoppingList{
+                destination?.shoppingList = shoppingList
             }
         }
     }

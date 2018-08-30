@@ -26,7 +26,7 @@ class ShareViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        UIUtility.configureTextFields(textFields: [usernameTextField])
+        UIUtility.configureTextFields(textFields: [usernameTextField], borderColor: UIColor.darkGray.cgColor)
     }
     
     private func loadAllUsers(){
