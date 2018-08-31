@@ -148,7 +148,7 @@ extension DetailsViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete{
             if var shoppingList = shoppingList{
-                shoppingList.content.remove(at: indexPath.row)
+                shoppingList.removeItem(at: indexPath.row)
                 tableView.reloadData()
             }
         }

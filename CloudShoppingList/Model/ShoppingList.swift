@@ -49,6 +49,11 @@ struct ShoppingList{
         persistTitle()
     }
     
+    mutating func removeItem(at index: Int){
+        self.content.remove(at: index)
+        persistContent()
+    }
+    
     mutating func checkItem(_ itemId: String){
         var item = content.first { (item) -> Bool in
             item.itemId == itemId
@@ -63,6 +68,10 @@ struct ShoppingList{
         }
         item?.status = false
         FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":false])
+    }
+    
+    private func persistContent(){
+            FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").setValue(self.content)
     }
     
     private func persistTitle(){
