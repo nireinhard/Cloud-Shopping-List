@@ -47,13 +47,22 @@ struct AuthenticationController{
             }
         })
     }
+    
+    static func loginUserGoogle(credentials: AuthCredential, completion: @escaping(String?)->()){
+        Auth.auth().signInAndRetrieveData(with: credentials) { (authResult, error) in
+            let userInfo = ["userid": authResult!.user.uid, "email": "", "type": "google"]
+            self.setUserLocalData(userInfo)
+            completion(authResult?.user.uid)
+        }
+    }
+    
     static func loginUser(withEmail: String, password: String, completion: @escaping (String?)->()) {
         Auth.auth().signIn(withEmail: withEmail, password: password, completion: { (user, error) in
             if error == nil {
                 if let user = user{
                     let verificationStatus: Bool = user.user.isEmailVerified
                     if verificationStatus{
-                        let userInfo = ["userid": user.user.uid, "email": withEmail, "password": password]
+                        let userInfo = ["userid": user.user.uid, "email": withEmail, "password": password, "type": "mail"]
                         self.setUserLocalData(userInfo)
                         completion(user.user.uid)
                     }else {

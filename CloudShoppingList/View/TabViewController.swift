@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class TabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).observe(.value) { (snapshot) in
+            let data = JSON(snapshot.value).dictionaryValue
+            if data["metadata"] == nil {
+                self.performSegue(withIdentifier: "missingInfoSegue", sender: nil)
+            }
+        }
+        
         NotificationListenerController.shared.startListening {
             if NotificationListenerController.shared.notifications.count != 0{
              self.tabBar.items?[1].badgeValue = "\(NotificationListenerController.shared.notifications.count)"
@@ -21,7 +29,6 @@ class TabViewController: UITabBarController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-     
     }
 
 }

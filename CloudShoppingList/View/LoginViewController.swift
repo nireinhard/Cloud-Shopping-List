@@ -8,9 +8,10 @@
 
 import UIKit
 import SVProgressHUD
+import GoogleSignIn
 
-class LoginViewController: UIViewController {
-    
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
+
     private enum ViewControllerType{
         case home, login
     }
@@ -25,6 +26,11 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // setup google button
+        let googleButton = GIDSignInButton()
+        googleButton.frame = CGRect(x: 16, y: view.frame.height - 100, width: view.frame.width-32, height: 50)
+        view.addSubview(googleButton)
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
 
     @IBAction func loginButtonTapped(_ sender: RoundedButton) {

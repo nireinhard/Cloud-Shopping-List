@@ -16,7 +16,7 @@ enum ViewControllerType {
 class LandingViewController: UIViewController {
     
     //MARK: Push to relevant ViewController
-    private func pushTo(viewController: ViewControllerType)  {
+    public func pushTo(viewController: ViewControllerType)  {
         switch viewController {
         case .home:
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "homeViewController") as! TabViewController
@@ -31,17 +31,24 @@ class LandingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let userInformation = UserDefaults.standard.dictionary(forKey: "userInformation") {
-            let savedUserId = userInformation["userid"] as! String
-            let savedEmail = userInformation["email"] as! String
-            let savedPassword = userInformation["password"] as! String
-            AuthenticationController.loginUser(withEmail: savedEmail, password: savedPassword) { [weak weakSelf = self](userId) in
-                DispatchQueue.main.async {
-                    if let userId = userId, userId == savedUserId {
-                        weakSelf?.pushTo(viewController: .home)
-                    } else {
-                        weakSelf?.pushTo(viewController: .login)
+            let loginType = userInformation["type"] as! String
+            if loginType == "mail"{
+                let savedUserId = userInformation["userid"] as! String
+                let savedEmail = userInformation["email"] as! String
+                let savedPassword = userInformation["password"] as! String
+                AuthenticationController.loginUser(withEmail: savedEmail, password: savedPassword) { [weak weakSelf = self](userId) in
+                    DispatchQueue.main.async {
+                        if let userId = userId, userId == savedUserId {
+                            weakSelf?.pushTo(viewController: .home)
+                        } else {
+                            weakSelf?.pushTo(viewController: .login)
+                        }
+                        weakSelf = nil
                     }
-                    weakSelf = nil
+                }
+            }else if loginType == "google"{
+                DispatchQueue.main.async {
+                    self.pushTo(viewController: .home)
                 }
             }
         } else {

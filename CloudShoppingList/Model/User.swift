@@ -104,6 +104,19 @@ struct User{
         }
     }
     
+    static func addMissingInfo(for userId: String, with username: String, completion: @escaping (Bool)->()){
+        let newValues = [
+            "username": username,
+            "mail": ""]
+        FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("metadata").updateChildValues((newValues)) { (err, user) in
+            if let err = err {
+                completion(false)
+            }else{
+                completion(true)
+            }
+            }
+    }
+    
     static func retrieveUserListener(userId: String, completion: @escaping (User?) -> ()) -> ListenerRegistration?{
         return nil
     }

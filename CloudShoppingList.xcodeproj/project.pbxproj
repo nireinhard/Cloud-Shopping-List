@@ -54,6 +54,7 @@
 		435F36ED20FF1FB900586B13 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36EC20FF1FB900586B13 /* ItemTableViewCell.swift */; };
 		435F36EF21006FF000586B13 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36EE21006FF000586B13 /* Notification.swift */; };
 		435F36F121007C3600586B13 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36F021007C3600586B13 /* NotificationsViewController.swift */; };
+		4384B68C213889A60006E2CF /* MissingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B68B213889A60006E2CF /* MissingInfoViewController.swift */; };
 		CF2DEB915904A78BC87C5BF9 /* Pods_CloudShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,7 @@
 		435F36EC20FF1FB900586B13 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		435F36EE21006FF000586B13 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		435F36F021007C3600586B13 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		4384B68B213889A60006E2CF /* MissingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingInfoViewController.swift; sourceTree = "<group>"; };
 		4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,6 +210,7 @@
 				430B36E92101293B005EADCF /* NotificationInvitationTableViewCell.swift */,
 				430B36EB210317DF005EADCF /* SettingsViewController.swift */,
 				430B36ED2103180B005EADCF /* SettingTableViewCell.swift */,
+				4384B68B213889A60006E2CF /* MissingInfoViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				435F36D520FB931100586B13 /* LandingViewController.swift in Sources */,
 				435F36CD20FA6A6E00586B13 /* NotificationUtility.swift in Sources */,
 				430B36EA2101293B005EADCF /* NotificationInvitationTableViewCell.swift in Sources */,
+				4384B68C213889A60006E2CF /* MissingInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +635,10 @@
 				DEVELOPMENT_TEAM = SFHGR93LDE;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = NiklasR.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -648,7 +655,10 @@
 				DEVELOPMENT_TEAM = SFHGR93LDE;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = NiklasR.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
