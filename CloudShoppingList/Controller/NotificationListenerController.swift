@@ -15,9 +15,9 @@ protocol NotificationListener: AnyObject{
 }
 
 class NotificationListenerController{
-
+    
     static let shared = NotificationListenerController()
-    weak var listener: NotificationListener?
+    var listener: NotificationListener?
     var notifications: [Notification] = [] {
         didSet{
             listener?.update()
@@ -30,7 +30,14 @@ class NotificationListenerController{
     }
     
     func removeNotification(notification: Notification){
-        FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("notifications").child(notification.notificationId).setValue(nil)
+        let index = notifications.index { (localnotification) -> Bool in
+            notification.notificationId == localnotification.notificationId
+        }
+        if let index = index {
+            notifications.remove(at: index)
+            FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("notifications").child(notification.notificationId).setValue(nil)
+            listener?.update()
+        }
     }
     
     func startListening(completion: @escaping()->()){
@@ -65,7 +72,7 @@ class NotificationListenerController{
     func stopListening(){
         if let ref = ref{
             FirebaseHelper.detachListener(ref)
-            
+            listening = false
         }
     }
 }

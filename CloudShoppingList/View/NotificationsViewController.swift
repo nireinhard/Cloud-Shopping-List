@@ -34,6 +34,8 @@ extension NotificationsViewController: NotificationListener{
         tableView.reloadData()
         if NotificationListenerController.shared.notifications.count != 0{
             self.navigationController?.tabBarItem.badgeValue = "\(NotificationListenerController.shared.notifications.count)"
+        }else if NotificationListenerController.shared.notifications.count == 0{
+            self.navigationController?.tabBarItem.badgeValue = nil
         }
     }
 }
