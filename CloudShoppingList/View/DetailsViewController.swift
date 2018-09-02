@@ -36,13 +36,17 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     var shoppingList: ShoppingList? {
         didSet{
             setupUI()
-            loadMembers {
-                self.memberTableView.reloadData()
-                self.setupScrollViewContent()
+            if firstLoad {
+                loadMembers {
+                    self.memberTableView.reloadData()
+                    self.setupScrollViewContent()
+                    self.firstLoad = false
+                }
             }
         }
     }
     
+    private var firstLoad = true
     private var members: [User] = []
     
     private func loadMembers(completion: @escaping ()->()){
@@ -272,19 +276,13 @@ extension DetailsViewController: UITableViewDataSource{
     }
     
     func setupScrollViewContent(){
-        horizontalScrollView?.removeAllItems()
-        if let members = shoppingList?.members{
-            let membersActive = members.filter { (key: String, value: Bool) -> Bool in
-                return value
-            }
-            
-            self.members.forEach { (user) in
-                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-                imageView.isUserInteractionEnabled = true
-                imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:))) )
-                imageView.setImageForName(string: user.username, backgroundColor: nil, circular: true, textAttributes: nil)
-                self.horizontalScrollView?.addItem(imageView)
-            }
+        let _ = horizontalScrollView?.removeAllItems()
+        self.members.forEach { (user) in
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:))) )
+            imageView.setImageForName(string: user.username, backgroundColor: nil, circular: true, textAttributes: nil)
+            self.horizontalScrollView?.addItem(imageView)
         }
     }
 }
