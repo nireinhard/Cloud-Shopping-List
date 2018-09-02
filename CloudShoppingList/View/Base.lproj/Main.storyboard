@@ -292,9 +292,19 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d5-2G-lvp">
                                 <rect key="frame" x="0.0" y="64" width="375" height="100"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kaK-8Z-NOw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="kaK-8Z-NOw" firstAttribute="top" secondItem="6d5-2G-lvp" secondAttribute="top" id="TXf-GU-fUv"/>
+                                    <constraint firstItem="kaK-8Z-NOw" firstAttribute="leading" secondItem="6d5-2G-lvp" secondAttribute="leading" id="WCe-Iy-LqF"/>
                                     <constraint firstAttribute="height" constant="100" id="dsD-me-Lbx"/>
+                                    <constraint firstAttribute="trailing" secondItem="kaK-8Z-NOw" secondAttribute="trailing" id="dtx-Gs-36p"/>
+                                    <constraint firstAttribute="bottom" secondItem="kaK-8Z-NOw" secondAttribute="bottom" id="ghV-Db-z2F"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="080-kV-dzH">
@@ -495,10 +505,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="inviteButton" destination="hKS-Dl-NS7" id="g4E-pA-sNk"/>
+                        <outlet property="memberTableView" destination="kaK-8Z-NOw" id="629-bP-YZr"/>
                         <outlet property="newItemTextField" destination="dUf-cS-O6W" id="DeK-ts-l3y"/>
                         <outlet property="settingsLabel" destination="70o-32-1Pw" id="UC2-3p-Cui"/>
                         <outlet property="shoppingListNameLabel" destination="080-kV-dzH" id="bHe-z6-Dth"/>
-                        <outlet property="tableView" destination="eDc-6L-wYr" id="Cub-yK-OvZ"/>
+                        <outlet property="tableView" destination="eDc-6L-wYr" id="yJQ-hd-vTB"/>
                         <segue destination="TA6-2u-c7n" kind="show" identifier="settingsSegue" id="OD6-Hb-YFB"/>
                     </connections>
                 </viewController>
@@ -997,7 +1008,28 @@
                     <view key="view" contentMode="scaleToFill" id="QzV-0g-ZgM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O3p-sp-c2g">
+                                <rect key="frame" x="123" y="164" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="K53-2y-8GV"/>
+                                    <constraint firstAttribute="width" constant="128" id="Nhr-Wg-aO8"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Benutzername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tk-d4-ySU">
+                                <rect key="frame" x="131.5" y="317" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3tk-d4-ySU" firstAttribute="top" secondItem="O3p-sp-c2g" secondAttribute="bottom" constant="25" id="ShB-ww-cNM"/>
+                            <constraint firstItem="O3p-sp-c2g" firstAttribute="top" secondItem="hAl-jh-MHj" secondAttribute="top" constant="100" id="Zxg-bv-OZb"/>
+                            <constraint firstItem="3tk-d4-ySU" firstAttribute="centerX" secondItem="hAl-jh-MHj" secondAttribute="centerX" id="shs-3j-apA"/>
+                            <constraint firstItem="O3p-sp-c2g" firstAttribute="centerX" secondItem="hAl-jh-MHj" secondAttribute="centerX" id="vwp-tU-gIy"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="hAl-jh-MHj"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profil" id="ioC-2P-p8I">
@@ -1008,6 +1040,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="profileImageView" destination="O3p-sp-c2g" id="Qcw-V9-qcu"/>
+                        <outlet property="usernameLabel" destination="3tk-d4-ySU" id="xpe-Sx-hUV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyq-Zh-iDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

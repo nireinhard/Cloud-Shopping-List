@@ -20,7 +20,10 @@ target 'CloudShoppingList' do
   pod 'Firebase/Firestore'
   pod 'SwiftMessages'
   pod 'FirebaseUI/Database'
+  pod 'Presentr'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'DZNEmptyDataSet'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod "InitialsImageView"
+  pod 'ASHorizontalScrollView'
 end
