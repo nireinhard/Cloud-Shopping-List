@@ -16,8 +16,13 @@ import ASHorizontalScrollView
 import Presentr
 import InitialsImageView
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UIViewController, UIScrollViewDelegate {
 
+    private struct ListMember{
+        var uid: String
+        var username: String
+    }
+    
     @IBOutlet weak var shoppingListNameLabel: UILabel!
     @IBOutlet weak var newItemTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -25,17 +30,30 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var inviteButton: UIBarButtonItem!
     @IBOutlet weak var memberTableView: UITableView!
     
+    var ref: UInt?
     var horizontalScrollView: ASHorizontalScrollView?
     var listRepresentation: ListRepresentation?
     var shoppingList: ShoppingList? {
         didSet{
             setupUI()
+            loadMembers {
+                self.memberTableView.reloadData()
+                self.setupScrollViewContent()
+            }
         }
     }
-    var ref: UInt?
     
-    deinit {
-        print("deinitalized details view controller")
+    private var members: [User] = []
+    
+    private func loadMembers(completion: @escaping ()->()){
+        shoppingList?.members.forEach({ (uid, status) in
+            User.loadUser(userId: uid, completion: { (user) in
+                if let user = user{
+                    self.members.append(user)
+                    completion()
+                }
+            }, fail: {})
+        })
     }
     
     override func viewDidLoad() {
@@ -43,6 +61,11 @@ class DetailsViewController: UIViewController {
         ref = loadList()
         setupUI()
         setupTable()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.memberTableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -190,12 +213,10 @@ extension DetailsViewController: UITableViewDataSource{
                 return shoppingList.content.count
             }
         }else if tableView == self.memberTableView {
-            if let shoppingList = shoppingList{
-                return shoppingList.members.count
-            }
+           return 1
         }
        
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -251,17 +272,18 @@ extension DetailsViewController: UITableViewDataSource{
     }
     
     func setupScrollViewContent(){
+        horizontalScrollView?.removeAllItems()
         if let members = shoppingList?.members{
             let membersActive = members.filter { (key: String, value: Bool) -> Bool in
                 return value
-                }
-            print("membersactive \(membersActive)")
-            membersActive.forEach { (key: String, value: Bool) in
+            }
+            
+            self.members.forEach { (user) in
                 let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-                    imageView.isUserInteractionEnabled = true
-                    imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))) )
-                    imageView.setImageForName(string: key, backgroundColor: nil, circular: true, textAttributes: nil)
-                    horizontalScrollView?.addItem(imageView)
+                imageView.isUserInteractionEnabled = true
+                imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:))) )
+                imageView.setImageForName(string: user.username, backgroundColor: nil, circular: true, textAttributes: nil)
+                self.horizontalScrollView?.addItem(imageView)
             }
         }
     }
