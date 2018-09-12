@@ -50,8 +50,9 @@ struct ShoppingList{
     }
     
     mutating func removeItem(at index: Int){
+        let firebaseId = self.content[index].itemId
         self.content.remove(at: index)
-        persistContent()
+        deleteItem(firebaseId)
     }
     
     mutating func checkItem(_ itemId: String){
@@ -67,15 +68,15 @@ struct ShoppingList{
             item.itemId == itemId
         }
         item?.status = false
-        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":false])
+    FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":false])
     }
     
-    private func persistContent(){
-            FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").setValue(self.content)
+    private func deleteItem(_ firebaseId: String){
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(firebaseId).setValue(nil)
     }
     
     private func persistTitle(){
-            FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("title").setValue(self.title)
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("title").setValue(self.title)
     }
     
     private func persistItem(_ item: Item){
