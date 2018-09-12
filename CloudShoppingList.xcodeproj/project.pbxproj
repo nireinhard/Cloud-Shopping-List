@@ -55,6 +55,7 @@
 		435F36EF21006FF000586B13 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36EE21006FF000586B13 /* Notification.swift */; };
 		435F36F121007C3600586B13 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36F021007C3600586B13 /* NotificationsViewController.swift */; };
 		4384B68C213889A60006E2CF /* MissingInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B68B213889A60006E2CF /* MissingInfoViewController.swift */; };
+		43AE819821499D5200C0B5A6 /* NotificationInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AE819721499D5200C0B5A6 /* NotificationInfoTableViewCell.swift */; };
 		CF2DEB915904A78BC87C5BF9 /* Pods_CloudShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		435F36EE21006FF000586B13 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		435F36F021007C3600586B13 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		4384B68B213889A60006E2CF /* MissingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingInfoViewController.swift; sourceTree = "<group>"; };
+		43AE819721499D5200C0B5A6 /* NotificationInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInfoTableViewCell.swift; sourceTree = "<group>"; };
 		4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,6 +213,7 @@
 				430B36EB210317DF005EADCF /* SettingsViewController.swift */,
 				430B36ED2103180B005EADCF /* SettingTableViewCell.swift */,
 				4384B68B213889A60006E2CF /* MissingInfoViewController.swift */,
+				43AE819721499D5200C0B5A6 /* NotificationInfoTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				435F36ED20FF1FB900586B13 /* ItemTableViewCell.swift in Sources */,
 				435F36CF20FA89D500586B13 /* User.swift in Sources */,
 				435F36C720FA64B200586B13 /* RoundedView.swift in Sources */,
+				43AE819821499D5200C0B5A6 /* NotificationInfoTableViewCell.swift in Sources */,
 				430B36EC210317DF005EADCF /* SettingsViewController.swift in Sources */,
 				43250B5B21031D1C00C2783F /* ClassUtility.swift in Sources */,
 				435F36C520FA639500586B13 /* RoundedButton.swift in Sources */,

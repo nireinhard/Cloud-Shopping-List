@@ -52,12 +52,26 @@ extension NotificationsViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "notificationcell", for: indexPath) as! NotificationInvitationTableViewCell
-        let invitation = NotificationListenerController.shared.notifications[indexPath.row]
+        let notification = NotificationListenerController.shared.notifications[indexPath.row]
         
-        cell.configure(notification: invitation, delegate: self)
+        if notification.type == .invitation {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "notificationcell", for: indexPath) as! NotificationInvitationTableViewCell
+            cell.configure(notification: notification, delegate: self)
+            return cell
+        }else if notification.type == .info{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "infocell", for: indexPath) as! NotificationInfoTableViewCell
+            cell.configure(notification: notification, delegate: self)
+            return cell
+        }
 
-        return cell
+
+        return UITableViewCell()
+    }
+}
+
+extension NotificationsViewController: ReadActionDelegate{
+    func readTapped(notification: Notification) {
+        NotificationListenerController.shared.removeNotification(notification: notification)
     }
 }
 

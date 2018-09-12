@@ -31,6 +31,7 @@ class ShareViewController: UIViewController {
     
     private func loadAllUsers(){
         User.loadAllUsers(completion: { (userlist) in
+            print("all users \(userlist)")
             self.setAllUsers(result: userlist)
         }) {
             NotificationUtility.showPrettyMessage(with: "Benutzer konnten nicht geladen werden", button: "ok", style: .error)

@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController {
             // set profile image and username label
             if let user = user {
                 self?.profileImageView.setImageForName(string: user.username, backgroundColor: nil, circular: true, textAttributes: nil)
-                self?.usernameLabel.text = user.username
+                self?.usernameLabel.text = "\(user.username) \(Me.uid)"
             }
         }) {
             NotificationUtility.showPrettyMessage(with: "Benutzerprofil konnte nicht geladen werden", button: "ok", style: .error)
@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController {
     @IBAction func logoutButtonTapped(_ sender: UIBarButtonItem) {
         AuthenticationController.logOutUser { (success) in
             if success{
+                NotificationListenerController.shared.stopListening()
                 self.dismiss(animated: true, completion: nil)
             }
         }

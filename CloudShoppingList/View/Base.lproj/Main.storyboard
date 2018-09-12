@@ -956,6 +956,42 @@
                                             <outlet property="messageLabel" destination="nAp-Le-2L8" id="Hxz-sI-T7h"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="infocell" rowHeight="75" id="t7G-G8-BaJ" customClass="NotificationInfoTableViewCell" customModule="CloudShoppingList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="103" width="375" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t7G-G8-BaJ" id="2GQ-hx-71O">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X möchte dich zu Y einladen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYr-nK-ct8">
+                                                    <rect key="frame" x="15" y="11" width="345" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfI-xC-DSa">
+                                                    <rect key="frame" x="16" y="40" width="50" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <state key="normal" title="Gelesen">
+                                                        <color key="titleColor" red="0.4039215686" green="0.81960784310000001" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="readButtonTapped:" destination="t7G-G8-BaJ" eventType="touchUpInside" id="TmD-gU-18o"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="zYr-nK-ct8" secondAttribute="trailing" id="3gw-nS-w6W"/>
+                                                <constraint firstItem="zYr-nK-ct8" firstAttribute="leading" secondItem="2GQ-hx-71O" secondAttribute="leadingMargin" id="5fj-Yc-QNi"/>
+                                                <constraint firstItem="ZfI-xC-DSa" firstAttribute="leading" secondItem="2GQ-hx-71O" secondAttribute="leading" constant="16" id="8lL-oJ-XY3"/>
+                                                <constraint firstItem="ZfI-xC-DSa" firstAttribute="top" secondItem="zYr-nK-ct8" secondAttribute="bottom" constant="8" id="gNz-K9-Ymg"/>
+                                                <constraint firstItem="zYr-nK-ct8" firstAttribute="top" secondItem="2GQ-hx-71O" secondAttribute="topMargin" id="jWW-Eo-BS3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="zYr-nK-ct8" id="1Gp-6p-fdI"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

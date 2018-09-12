@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>202843641291-rnps2m3vt4j0psegov0fjq9f8d308pqg.apps.googleusercontent.com</string>
+	<string>202843641291-8rmhf6fog3jtvaotah8ilbsv30efoha2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.202843641291-rnps2m3vt4j0psegov0fjq9f8d308pqg</string>
+	<string>com.googleusercontent.apps.202843641291-8rmhf6fog3jtvaotah8ilbsv30efoha2</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDdSHwjZUtRs7zSmzOpBdLcAT8_x2eI7pI</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>NiklasR.CloudShoppingList</string>
+	<string>htw.CloudShoppingList</string>
 	<key>PROJECT_ID</key>
 	<string>einkaufszettel-60ff5</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:202843641291:ios:cbc9acb3193df906</string>
+	<string>1:202843641291:ios:c36ec5477671c3f2</string>
 	<key>DATABASE_URL</key>
 	<string>https://einkaufszettel-60ff5.firebaseio.com</string>
 </dict>

@@ -10,7 +10,7 @@ import Foundation
 import FirebaseDatabase
 
 enum NotificationType{
-    case invitation, unclassified
+    case invitation, info, unclassified
 }
 
 struct Notification{
@@ -24,12 +24,31 @@ struct Notification{
         self.notificationId = notificationId
         if type == "invitation"{
             self.type = .invitation
+        }else if type == "info"{
+            self.type = .info
         }else{
             self.type = .unclassified
         }
         self.message = message
         self.date = date
         self.listId = listId
+    }
+    
+    static func sendAddIitemInfoNotification(from senderUser: User, list: ShoppingList, item: Item){
+        let notificationData: [String:Any] = [
+            "type": "info",
+            "message": "\(senderUser.username) hat \(item.text) zu \(list.title) hinzugefügt",
+            "date": ServerValue.timestamp(),
+            "listId": list.listId
+        ]
+        
+        for member in list.members{
+            if member.value{
+                if member.key != Me.uid{
+                 FirebaseHelper.getRealtimeDB().child("users").child(member.key).child("notifications").childByAutoId().updateChildValues(notificationData)
+                }
+            }
+        }
     }
     
     static func sendInvitationNotification(from senderUser: User, to receiverUser: User, list: ShoppingList){
@@ -39,7 +58,6 @@ struct Notification{
             "date": ServerValue.timestamp(),
             "listId": list.listId
         ]
-        
         FirebaseHelper.getRealtimeDB().child("users").child(receiverUser.id).child("notifications").childByAutoId().updateChildValues(notificationData)
     }
     

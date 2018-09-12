@@ -29,10 +29,11 @@ struct ShoppingList{
         self.priviliges = priviliges
     }
     
-    mutating func addItem(item: Item, userId: String){
+    mutating func addItem(item: Item, userId: String, success: ()->()){
         if (checkPrivilige(userId)){
             content.append(item)
             persistItem(item)
+            success()
         }else{
             NotificationUtility.showPrettyMessage(with: "Du hast keine Berechtigungen Positionen hinzuzufügen", button: "ok", style: .error)
         }
