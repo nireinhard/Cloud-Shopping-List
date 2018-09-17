@@ -56,12 +56,6 @@ extension HomeViewController: UITableViewDataSource{
         
         cell.configure(for: list, delegate: self)
         
-        if let membercount = info["membercount"]?.intValue {
-            cell.memberInfoTextField.text = formatMemberInfo(membercount: membercount)
-        }else{
-            cell.memberInfoTextField.text = "Du"
-        }
-        
         return cell
     }
     

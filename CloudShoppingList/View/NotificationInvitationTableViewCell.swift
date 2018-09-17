@@ -15,7 +15,6 @@ protocol InvitationActionDelegate: AnyObject{
 
 class NotificationInvitationTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
     var notification: Notification?

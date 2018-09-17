@@ -77,7 +77,15 @@ struct ShoppingList{
     }
     
     private func persistTitle(){
+        // change title of list itself
         FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("title").setValue(self.title)
+        // change title of all list representations in all users who are members
+        for member in self.members{
+            // only member = true users
+            if member.value{
+                FirebaseHelper.getRealtimeDB().child("users").child(member.key).child("lists").child(self.listId).child("title").setValue(self.title)
+            }
+        }
     }
     
     private func persistItem(_ item: Item){

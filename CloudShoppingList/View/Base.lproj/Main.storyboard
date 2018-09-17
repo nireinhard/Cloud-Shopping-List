@@ -218,15 +218,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sbe-lt-voo">
-                                                    <rect key="frame" x="15" y="11" width="42" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="42" height="55"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oz9-J1-kQV">
-                                                    <rect key="frame" x="15" y="40" width="33" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.42745098039215684" green="0.47450980392156861" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdJ-EV-SNh">
@@ -237,18 +231,16 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="oz9-J1-kQV" firstAttribute="leading" secondItem="BjW-4Q-TrX" secondAttribute="leadingMargin" id="7Jg-sf-l2u"/>
+                                                <constraint firstItem="Sbe-lt-voo" firstAttribute="centerY" secondItem="BdJ-EV-SNh" secondAttribute="centerY" id="7u5-fe-zcM"/>
                                                 <constraint firstAttribute="trailing" secondItem="BdJ-EV-SNh" secondAttribute="trailing" id="8I7-O1-uLH"/>
                                                 <constraint firstItem="BdJ-EV-SNh" firstAttribute="leading" secondItem="BjW-4Q-TrX" secondAttribute="leading" id="Eez-xY-Qjy"/>
                                                 <constraint firstItem="BdJ-EV-SNh" firstAttribute="top" secondItem="BjW-4Q-TrX" secondAttribute="top" id="Eli-Mu-E1s"/>
                                                 <constraint firstItem="Sbe-lt-voo" firstAttribute="leading" secondItem="BjW-4Q-TrX" secondAttribute="leadingMargin" id="FZZ-Hd-B8A"/>
                                                 <constraint firstAttribute="bottom" secondItem="BdJ-EV-SNh" secondAttribute="bottom" id="L2X-1k-SLb"/>
-                                                <constraint firstItem="oz9-J1-kQV" firstAttribute="top" secondItem="Sbe-lt-voo" secondAttribute="bottom" constant="8" id="SFR-hi-xa7"/>
                                                 <constraint firstItem="Sbe-lt-voo" firstAttribute="top" secondItem="BjW-4Q-TrX" secondAttribute="topMargin" id="oeQ-vi-JAQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="memberInfoTextField" destination="oz9-J1-kQV" id="6D5-zl-Gvr"/>
                                             <outlet property="shoppingListNameTextField" destination="Sbe-lt-voo" id="JAg-CP-Nwk"/>
                                         </connections>
                                     </tableViewCell>
@@ -931,7 +923,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="dateLabel" destination="BO0-dX-GYw" id="trS-5C-rpj"/>
                                             <outlet property="messageLabel" destination="nAp-Le-2L8" id="Hxz-sI-T7h"/>
                                         </connections>
                                     </tableViewCell>

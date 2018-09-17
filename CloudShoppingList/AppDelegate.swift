@@ -89,6 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
         // Print full message.
         print(userInfo)
         
+        application.applicationIconBadgeNumber = 1
+        
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
