@@ -9,8 +9,6 @@
 import UIKit
 
 class ShareViewController: UIViewController {
-
-    @IBOutlet weak var shareLinkLabel: UILabel!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
@@ -20,7 +18,6 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        generateShareLink()
         setupTable()
         loadAllUsers()
     }
@@ -36,11 +33,6 @@ class ShareViewController: UIViewController {
         }) {
             NotificationUtility.showPrettyMessage(with: "Benutzer konnten nicht geladen werden", button: "ok", style: .error)
         }
-    }
-    
-    private func generateShareLink(){
-        var base = "fbase.io/98543i"
-        shareLinkLabel.text = base
     }
     
     private func setupTable(){
