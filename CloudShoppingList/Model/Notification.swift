@@ -66,13 +66,15 @@ struct Notification{
     }
     
     static func sendInvitationNotification(from senderUser: User, to receiverUser: User, list: ShoppingList){
+        let message = "\(senderUser.username) möchte dich zu \(list.title) einladen"
         let notificationData: [String:Any] = [
             "type": "invitation",
-            "message": "\(senderUser.username) möchte dich zu \(list.title) einladen",
+            "message": message,
             "date": ServerValue.timestamp(),
             "listId": list.listId
         ]
         FirebaseHelper.getRealtimeDB().child("users").child(receiverUser.id).child("notifications").childByAutoId().updateChildValues(notificationData)
+        sendPushNotification(message, receiverUser.id)
     }
     
     static func getAllNotifcationsFor(userId: String){
