@@ -72,6 +72,11 @@ class ShareViewController: UIViewController {
         }
         self.tableView.reloadData()
     }
+    
+    //Tastatur ausblenden mit Touch ausserhalb der Tastatur
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 extension ShareViewController: UITableViewDelegate{

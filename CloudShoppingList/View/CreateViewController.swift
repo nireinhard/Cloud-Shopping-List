@@ -38,4 +38,9 @@ class CreateViewController: UIViewController {
             _ = self.navigationController?.popViewController(animated: true)
         }
     }
+    
+    //Tastatur ausblenden mit Touch ausserhalb der Tastatur
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

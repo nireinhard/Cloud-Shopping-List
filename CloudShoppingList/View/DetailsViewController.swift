@@ -179,6 +179,11 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
+    
+    //Tastatur ausblenden mit Touch ausserhalb der Tastatur
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 extension DetailsViewController: UITableViewDelegate{

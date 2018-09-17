@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController {
             // set profile image and username label
             if let user = user {
                 self?.profileImageView.setImageForName(string: user.username, backgroundColor: nil, circular: true, textAttributes: nil)
-                self?.usernameLabel.text = "\(user.username) \(Me.uid)"
+                self?.usernameLabel.text = "\(user.username)"
             }
         }) {
             NotificationUtility.showPrettyMessage(with: "Benutzerprofil konnte nicht geladen werden", button: "ok", style: .error)
