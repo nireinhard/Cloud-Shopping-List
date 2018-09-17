@@ -157,13 +157,13 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
        
         if var shoppingList = shoppingList{
             
-            User.loadUser(userId: Me.uid, completion: { (user) in
+            User.loadUser(userId: Me.uid, completion: { [weak self] (user) in
                 if let user = user {
                     let item = Item(text: itemText, status: false, by: user.username, userId: Me.uid)
                     var list = shoppingList
                     list.addItem(item: item, userId: Me.uid, success: {
                         Notification.sendAddIitemInfoNotification(from: user, list: shoppingList, item: item)
-                        self.newItemTextField.text = ""
+                        self?.newItemTextField.text = ""
                     })
                 }
             }) {

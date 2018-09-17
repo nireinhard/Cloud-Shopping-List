@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.7.2)
   - ASHorizontalScrollView (1.5.1)
   - BoringSSL (10.0.3):
     - BoringSSL/Implementation (= 10.0.3)
@@ -137,6 +138,7 @@ PODS:
     - TwitterCore (>= 3.1.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.7)
   - ASHorizontalScrollView
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - DZNEmptyDataSet
@@ -167,6 +169,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ViccAlexander/Chameleon.git
 
 SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   ASHorizontalScrollView: 9c98b9226509540075b6398c92f68fb474bea7e9
   BoringSSL: c46efb47593135382bc0934196f16d2f726f5f36
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
@@ -201,6 +204,6 @@ SPEC CHECKSUMS:
   TwitterCore: 644d59e75abccb26cf0a9050d2c4dea0e5412241
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
 
-PODFILE CHECKSUM: 011a0f85c501db930c941f97865386549930d6d4
+PODFILE CHECKSUM: 512987949a620936babd33c55685f5dbcef6ba03
 
 COCOAPODS: 1.4.0

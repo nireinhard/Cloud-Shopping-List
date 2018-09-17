@@ -112,6 +112,7 @@
 		435F36F021007C3600586B13 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		4384B68B213889A60006E2CF /* MissingInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingInfoViewController.swift; sourceTree = "<group>"; };
 		43AE819721499D5200C0B5A6 /* NotificationInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInfoTableViewCell.swift; sourceTree = "<group>"; };
+		43CD1C642149B2C40072B62A /* CloudShoppingList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CloudShoppingList.entitlements; sourceTree = "<group>"; };
 		4AF48ED701E2762BB36D3E21 /* Pods_CloudShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +159,7 @@
 		4313D34520D4610A00B93B11 /* CloudShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				43CD1C642149B2C40072B62A /* CloudShoppingList.entitlements */,
 				4313D35D20D461DC00B93B11 /* Utility */,
 				4313D35C20D461C400B93B11 /* View */,
 				4313D35B20D461BD00B93B11 /* Controller */,
@@ -303,6 +305,14 @@
 				TargetAttributes = {
 					4313D34220D4610A00B93B11 = {
 						CreatedOnToolsVersion = 9.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -387,6 +397,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ASHorizontalScrollView/ASHorizontalScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
@@ -412,6 +423,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ASHorizontalScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
@@ -641,14 +653,12 @@
 			baseConfigurationReference = 3874D6B081102F9B10EDC382 /* Pods-CloudShoppingList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CloudShoppingList/CloudShoppingList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V8K32D38V;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = htw.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -661,14 +671,12 @@
 			baseConfigurationReference = CCD6B474C888846CFAD99C5C /* Pods-CloudShoppingList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CloudShoppingList/CloudShoppingList.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6V8K32D38V;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = htw.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

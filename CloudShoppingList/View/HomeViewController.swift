@@ -10,6 +10,7 @@ import UIKit
 import FirebaseUI
 import FirebaseDatabase
 import SwiftyJSON
+import FirebaseMessaging
 
 class HomeViewController: UIViewController, FUICollectionDelegate{
     
@@ -31,6 +32,9 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
     }
     
     private func setupData(){
+        Messaging.messaging().subscribe(toTopic: Me.uid) { error in
+            print("Subscribed to my userid channel")
+        }
 
     }
     

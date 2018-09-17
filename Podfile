@@ -25,5 +25,6 @@ target 'CloudShoppingList' do
   pod 'DZNEmptyDataSet'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod "InitialsImageView"
+  pod 'Alamofire', '~> 4.7'
   pod 'ASHorizontalScrollView'
 end
