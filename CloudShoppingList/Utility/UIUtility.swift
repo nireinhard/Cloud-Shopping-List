@@ -25,7 +25,6 @@ enum UIUtility{
 }
 
 extension UIViewController{
-        
     @objc func hidingKeyboard(){
         self.view.frame.origin.y = 0
     }

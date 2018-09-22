@@ -10,6 +10,7 @@ import UIKit
 import SVProgressHUD
 import GoogleSignIn
 
+// view controller to login users
 class LoginViewController: UIViewController, GIDSignInUIDelegate {
 
     private enum ViewControllerType{
@@ -19,6 +20,7 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet weak var mailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    // workaround to properly layout textfields
     override func viewDidLayoutSubviews() {
          UIUtility.configureTextFields(textFields: [mailTextField, passwordTextField])
         setTextFieldDelegates()
@@ -65,6 +67,11 @@ class LoginViewController: UIViewController, GIDSignInUIDelegate {
     private func setTextFieldDelegates(){
         mailTextField.delegate = self
         passwordTextField.delegate = self
+    }
+    
+    // hide keyboard when view controller is touched
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

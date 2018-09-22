@@ -8,6 +8,7 @@
 
 import Foundation
 
+// struct to represent a shopping list item
 struct Item{
     var itemId: String
     var text: String
@@ -31,6 +32,7 @@ struct Item{
 }
 
 extension Item{
+    // returns the dictionary representation of the current item
     func toDictionary()-> [String:Any]{
         let itemDict: [String:Any] = [
             "by": self.by,

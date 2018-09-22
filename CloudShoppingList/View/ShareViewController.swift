@@ -8,6 +8,7 @@
 
 import UIKit
 
+// view controller to invite users to a shopping list
 class ShareViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
@@ -22,14 +23,16 @@ class ShareViewController: UIViewController {
         loadAllUsers()
     }
     
+    // workaround to properly layout textfields
     override func viewDidLayoutSubviews() {
         UIUtility.configureTextFields(textFields: [usernameTextField], borderColor: UIColor.darkGray.cgColor)
     }
     
+    // retrieves all users from the database and saves them in a user array
     private func loadAllUsers(){
-        User.loadAllUsers(completion: { (userlist) in
+        User.loadAllUsers(completion: { [weak self](userlist) in
             print("all users \(userlist)")
-            self.setAllUsers(result: userlist)
+            self?.allUsers = userlist
         }) {
             NotificationUtility.showPrettyMessage(with: "Benutzer konnten nicht geladen werden", button: "ok", style: .error)
         }
@@ -39,10 +42,6 @@ class ShareViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-    }
-
-    private func setAllUsers(result: [User]){
-        allUsers = result
     }
     
     @IBAction func searchButtonTapped(_ sender: RoundedButton) {
@@ -65,7 +64,7 @@ class ShareViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-    //Tastatur ausblenden mit Touch ausserhalb der Tastatur
+    // hide keyboard when view controller is touched
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -98,9 +97,9 @@ extension ShareViewController: InviteCellDelegate{
     
     func inviteUser(_ receiverUser: User){
         User.loadUser(userId: Me.uid, completion: { (user) in
-            if let senderUser = user, var list = self.list{
-                Notification.sendInvitationNotification(from: senderUser, to: receiverUser, list: list)
-                list.addMember(userId: receiverUser.id)
+            if let senderUser = user{
+                Notification.sendInvitationNotification(from: senderUser, to: receiverUser, list: self.list!)
+                self.list!.addMember(userId: receiverUser.id)
                 NotificationUtility.showPrettyMessage(with: "Deine Einladung wurde versendet", button: "ok", style: .success)
                 self.refreshView()
             }

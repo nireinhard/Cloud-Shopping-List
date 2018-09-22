@@ -14,8 +14,9 @@ protocol NotificationListener: AnyObject{
     func update()
 }
 
+// controller class to manage in app notifications
 class NotificationListenerController{
-    
+    // implements singleton pattern to prevent existence of multiple instances
     static let shared = NotificationListenerController()
     var listener: NotificationListener?
     var notifications: [Notification] = [] {
@@ -29,6 +30,7 @@ class NotificationListenerController{
     private init(){
     }
     
+    // removes a notification for the current user
     func removeNotification(notification: Notification){
         let index = notifications.index { (localnotification) -> Bool in
             notification.notificationId == localnotification.notificationId
@@ -40,12 +42,12 @@ class NotificationListenerController{
         }
     }
     
+    // start listening to notifactions for the current user
     func startListening(completion: @escaping()->()){
         if listening{
             return
         }
         
-        print("started listening for notifications")
         ref = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("notifications").observe(.value) { (snapshot) in
             self.listening = true
             self.notifications.removeAll()
@@ -69,6 +71,7 @@ class NotificationListenerController{
         }
     }
     
+    // stop listening for notifications
     func stopListening(){
         if let ref = ref{
             FirebaseHelper.detachListener(ref)

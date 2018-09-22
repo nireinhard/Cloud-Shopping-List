@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 
+// view controller to create a new shopping list
 class CreateViewController: UIViewController {
 
     @IBOutlet weak var createListButton: RoundedButton!
@@ -30,7 +31,6 @@ class CreateViewController: UIViewController {
             createListButton.isEnabled = true
             return
         }
-        
         SVProgressHUD.show()
         ShoppingList.createShoppingList(title: listname) {
             SVProgressHUD.dismiss()
@@ -39,7 +39,7 @@ class CreateViewController: UIViewController {
         }
     }
     
-    //Tastatur ausblenden mit Touch ausserhalb der Tastatur
+    // hide keyboard when view controller is touched
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

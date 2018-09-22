@@ -16,11 +16,13 @@ enum UpdateStatus{
     case initialWrite, update
 }
 
+// representation of a list to store in the user object
 struct ListRepresentation{
     let listId: String
     let listName: String
 }
 
+// struct representing a user object
 struct User{
     var id: String
     var username: String
@@ -40,12 +42,13 @@ struct User{
         self.lists = lists
     }
     
+    // creates a user object from a givin userid and JSON data and returns it, if successful
     private static func createUserFromJSON(userId: String, data: JSON) -> User?{
         let data = data.dictionaryValue
         let metadata = data["metadata"]?.dictionaryValue
         let listdata = data["lists"]?.dictionaryValue
        
-        guard let meta = metadata, let list = listdata else {
+        guard let meta = metadata else {
             return nil
         }
 
@@ -54,13 +57,15 @@ struct User{
         
         var lists: [ListRepresentation] = []
         
-        for listitem in list{
-            let listitemDictionary = listitem.value.dictionaryValue
-            let listId = listitemDictionary["listId"]?.stringValue
-            let title = listitemDictionary["title"]?.stringValue
-            if let listId = listId, let title = title{
-                let listRepresentation = ListRepresentation(listId: listId, listName: title)
-                lists.append(listRepresentation)
+        if let listdata = listdata{
+            for listitem in listdata{
+                let listitemDictionary = listitem.value.dictionaryValue
+                let listId = listitemDictionary["listId"]?.stringValue
+                let title = listitemDictionary["title"]?.stringValue
+                if let listId = listId, let title = title{
+                    let listRepresentation = ListRepresentation(listId: listId, listName: title)
+                    lists.append(listRepresentation)
+                }
             }
         }
         
@@ -69,6 +74,7 @@ struct User{
         return user
     }
     
+    // retrieves all users in the database
     static func loadAllUsers(completion: @escaping ([User])->(), fail: @escaping ()->()){
          FirebaseHelper.getRealtimeDB().child("users").observeSingleEvent(of: .value) { (snapshot) in
             let allUserData = JSON(snapshot.value).dictionaryValue
@@ -91,6 +97,7 @@ struct User{
         }
     }
     
+    // retrieves a single user from the database, identified by the userid
     static func loadUser(userId: String, completion: @escaping (User?)->(), fail: @escaping ()->()){
         let userRef = FirebaseHelper.getRealtimeDB().child("users").child(userId)
         userRef.observeSingleEvent(of: .value) { (snapshot) in
@@ -104,6 +111,8 @@ struct User{
         }
     }
     
+    // used when a user registers with either google or facebook to complete the user information
+    // which is needed for the app to work properly
     static func addMissingInfo(for userId: String, with username: String, completion: @escaping (Bool)->()){
         let newValues = [
             "username": username,
@@ -117,24 +126,7 @@ struct User{
             }
     }
     
-    static func retrieveUserListener(userId: String, completion: @escaping (User?) -> ()) -> ListenerRegistration?{
-        return nil
-    }
-    
-    func update(completion: @escaping ()->()){
-        let userRef = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid);
-        let jsonUser = toJson(mode: .update)
-        
-        userRef.setValue(jsonUser) { (error, ref) in
-            if let error = error{
-                print("Error updating user document: \(error)")
-            }else{
-                print("User document successfully updated")
-                completion()
-            }
-        }
-    }
-    
+    // used to save the current user object to the database
     func save(completion: @escaping ()->()){
         let userRef = FirebaseHelper.getRealtimeDB().child("users").child(Me.uid);
         let jsonUser = toJson(mode: .initialWrite)
@@ -152,7 +144,11 @@ struct User{
 
 extension User{
     
+    // responsible to transform the user metadata to a json document based on the update status
+    // update status = .initialWrite => include created field
     private func getMetadataJson(_ mode: UpdateStatus) -> [String:Any]{
+        // ServerValue.timestamp might be shown as an error in xcode but the project compiles nevertheless
+        // and everything works properly
         var metadataJson: [String : Any] = [
             "mail": self.mail,
             "username": self.username,

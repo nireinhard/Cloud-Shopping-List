@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftMessages
 
+// Utility for displaying global notifications within the app
 enum NotificationUtility{
     static func showPrettyMessage(with body: String, button buttontext: String, style:Theme){
         var config = SwiftMessages.Config()

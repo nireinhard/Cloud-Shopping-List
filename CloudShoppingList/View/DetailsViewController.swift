@@ -16,6 +16,7 @@ import ASHorizontalScrollView
 import Presentr
 import InitialsImageView
 
+// view controller to present a shopping list
 class DetailsViewController: UIViewController, UIScrollViewDelegate {
 
     private struct ListMember{
@@ -49,6 +50,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     private var firstLoad = true
     private var members: [User] = []
     
+    // retrieves all members of this shopping list and adds them to the members array
     private func loadMembers(completion: @escaping ()->()){
         shoppingList?.members.forEach({ (uid, status) in
             User.loadUser(userId: uid, completion: { (user) in
@@ -74,7 +76,6 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         if let ref = ref{
-            print("about to detach listener")
             FirebaseHelper.detachListener(ref)
         }
     }
@@ -135,6 +136,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         performSegue(withIdentifier: "settingsSegue", sender: nil)
     }
     
+    // manages different segues for the current view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "shareSegue"{
             let destination = segue.destination as? ShareViewController
@@ -149,14 +151,14 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    // called when add item button is tapped
     @IBAction func addItemButtonTapped(_ sender: RoundedButton) {
         guard let itemText = newItemTextField.text, !itemText.isEmpty else{
             NotificationUtility.showPrettyMessage(with: "Bitte gib einen Text für den Eintrag ein", button: "ok", style: .error)
             return
         }
        
-        if var shoppingList = shoppingList{
-            
+        if let shoppingList = shoppingList{
             User.loadUser(userId: Me.uid, completion: { [weak self] (user) in
                 if let user = user {
                     let item = Item(text: itemText, status: false, by: user.username, userId: Me.uid)
@@ -180,7 +182,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    //Tastatur ausblenden mit Touch ausserhalb der Tastatur
+    // hide keyboard when view controller is touched
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -234,6 +236,7 @@ extension DetailsViewController: UITableViewDataSource{
         return 1
     }
     
+    // setup the member icons
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
             if let shoppingList = shoppingList{

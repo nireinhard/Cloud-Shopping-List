@@ -13,9 +13,11 @@ enum ViewControllerType {
     case login
 }
 
+// view controller responsible for pushing already signed in users to the HomeViewController
+// instead of showing the LoginViewController
 class LandingViewController: UIViewController {
     
-    //MARK: Push to relevant ViewController
+    // push to the context relevant view controller
     public func pushTo(viewController: ViewControllerType)  {
         switch viewController {
         case .home:
@@ -27,7 +29,7 @@ class LandingViewController: UIViewController {
         }
     }
     
-    //MARK: Check if user is signed in or not
+    // check if user is signed in or not
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let userInformation = UserDefaults.standard.dictionary(forKey: "userInformation") {
@@ -59,7 +61,4 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
-    
 }

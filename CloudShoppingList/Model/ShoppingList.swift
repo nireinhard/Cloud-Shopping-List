@@ -10,6 +10,7 @@ import Foundation
 import FirebaseDatabase
 import SwiftyJSON
 
+// stuct to represent a shopping list
 struct ShoppingList{
     var listId: String
     var title: String
@@ -29,33 +30,43 @@ struct ShoppingList{
         self.priviliges = priviliges
     }
     
+    // adds a item to the shopping list
     mutating func addItem(item: Item, userId: String, success: ()->()){
         if (checkPrivilige(userId)){
             content.append(item)
-            persistItem(item)
+            FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").childByAutoId().updateChildValues(item.toDictionary())
             success()
         }else{
             NotificationUtility.showPrettyMessage(with: "Du hast keine Berechtigungen Positionen hinzuzufügen", button: "ok", style: .error)
         }
     }
     
+    // adds a member to the shopping list
     mutating func addMember(userId: String){
+        // make local changes
         members[userId] = false
         priviliges[userId] = false
-        persistMember(userId: userId)
+        // persist to firebase
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("members").updateChildValues([userId: false])
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("priviliges").updateChildValues([userId: false])
     }
     
+    // changes the title of the shopping list
     mutating func changeTitle(newTitle: String){
+        // make local changes
         self.title = newTitle
+        // persist to firebase
         persistTitle()
     }
     
+    // removes an item from the shopping list
     mutating func removeItem(at index: Int){
         let firebaseId = self.content[index].itemId
         self.content.remove(at: index)
-        deleteItem(firebaseId)
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(firebaseId).setValue(nil)
     }
     
+    // checks the specified item with itemId in the shopping list
     mutating func checkItem(_ itemId: String){
         var item = content.first { (item) -> Bool in
             item.itemId == itemId
@@ -64,16 +75,13 @@ struct ShoppingList{
         FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":true])
     }
     
+    // unchecks the specified item with itemId in the shopping list
     mutating func uncheckItem(_ itemId: String){
         var item = content.first { (item) -> Bool in
             item.itemId == itemId
         }
         item?.status = false
-    FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":false])
-    }
-    
-    private func deleteItem(_ firebaseId: String){
-        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(firebaseId).setValue(nil)
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").child(itemId).updateChildValues(["status":false])
     }
     
     private func persistTitle(){
@@ -88,23 +96,19 @@ struct ShoppingList{
         }
     }
     
-    private func persistItem(_ item: Item){
-        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("content").childByAutoId().updateChildValues(item.toDictionary())
-    }
-    
-    private func persistMember(userId: String){
-        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("members").updateChildValues([userId: false])
-        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("priviliges").updateChildValues([userId: false])
-    }
-    
+    // checks the priviliges of a given user for the current shopping list
     public func checkPrivilige(_ userId: String) -> Bool{
         return priviliges[userId] == true
     }
     
+    // changes the priviliges of a given user for the current shopping list
+    // newStatus = true: can check/uncheck items and add new items
+    // newStatus = false: can only see the items
     static func changePrivilige(for userId: String, on shoppingListId: String, newStatus: Bool){
         FirebaseHelper.getRealtimeDB().child("lists").child(shoppingListId).child("priviliges").updateChildValues([userId: newStatus])
     }
     
+    // creates a new shopping list in the database
     static func createShoppingList(title: String, completion: @escaping ()->()){
         let newListJson: [String:Any] = [
             "content": [:],
@@ -114,6 +118,7 @@ struct ShoppingList{
             "priviliges": [Me.uid: true],
             "created": ServerValue.timestamp()
         ]
+        // adds a new document to the lists collection
     FirebaseHelper.getRealtimeDB().child("lists").childByAutoId().setValue(newListJson) { (error, ref) in
             if let error = error {
                 print(error)
@@ -122,6 +127,7 @@ struct ShoppingList{
                     "title": title,
                     "listId": ref.key
                 ]
+                // adds a list representation document in the users collection
                 FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("lists").child(ref.key).setValue(newListRepresentationJson, withCompletionBlock: { (error, ref) in
                     if let error = error {
                         print(error)
@@ -133,64 +139,40 @@ struct ShoppingList{
         }
     }
     
-    static func deleteShoppingList(listId: String, completion: @escaping ()->(), fail: @escaping ()->()){
-        let list = ShoppingList.loadShoppingList(mode: .load, listId: listId) { (list) in
-            if Me.uid == list.initiator{
-                // user is initiator -> delete list completely
-                // delete list in 'users' reference from every member
-                for member in list.members{
-                    //print("key: \(member.key)")
-                    FirebaseHelper.getRealtimeDB().child("users").child(member.key).child("lists").child(listId).setValue(nil)
-                }
-                // delete list itself
-                FirebaseHelper.getRealtimeDB().child("lists").child(list.listId).setValue(nil)
-            }else{
-                // simply remove user from list and list from user
-                FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("lists").child(list.listId).setValue(nil)
-                FirebaseHelper.getRealtimeDB().child("lists").child(list.listId).child("members").child(Me.uid).setValue(nil)
-                FirebaseHelper.getRealtimeDB().child("lists").child(list.listId).child("priviliges").child(Me.uid).setValue(nil)
-                completion()
-            }
-        }
+    // deletes a shopping list specified by the listId
+    static func deleteShoppingList(listId: String){
+        FirebaseHelper.getRealtimeDB().child("lists").child(listId).child("members").child(Me.uid).setValue(nil)
+        FirebaseHelper.getRealtimeDB().child("lists").child(listId).child("priviliges").child(Me.uid).setValue(nil)
+        FirebaseHelper.getRealtimeDB().child("users").child(Me.uid).child("lists").child(listId).setValue(nil)
     }
  
+    // creates a new shopping list object from json
     private static func createShoppingListFromJSON(listId: String, data: JSON) -> ShoppingList?{
         let data = data.dictionaryValue
-        
         var memberDictionary: [String:Bool] = [:]
-        
-        print("data: \(data)")
         let initiator = data["initiator"]?.stringValue
         let title = data["title"]?.stringValue
         let content = data["content"]?.dictionaryValue
-        print("datacontent: \(content)")
-        
         let members = data["members"]?.dictionaryValue
+        var priviligeDictionary: [String:Bool] = [:]
+        let priviliges = data["priviliges"]?.dictionaryValue
         
         if let members = members{
             for member in members{
                 memberDictionary[member.key] = member.value.boolValue
             }
         }
-        
-        var priviligeDictionary: [String:Bool] = [:]
-        let priviliges = data["priviliges"]?.dictionaryValue
-        
+    
         if let priviliges = priviliges{
             for member in priviliges{
                 priviligeDictionary[member.key] = member.value.boolValue
             }
         }
-        
-        print("members: \(memberDictionary)")
-        print("priviliges: \(priviligeDictionary)")
-        
+    
         var items: [Item] = []
         
         if let content = content{
-            print(content)
             for element in content{
-                print("element \(element)")
                 let itemId = element.key
                 let status = element.value.dictionaryValue["status"]?.boolValue
                 let by = element.value.dictionaryValue["by"]?.stringValue
@@ -204,15 +186,17 @@ struct ShoppingList{
             }
         }
         
-        print("all items: \(items)")
-        
         if let title = title, let initiator = initiator{
             let shoppingList = ShoppingList(listId: listId, title: title, members: memberDictionary, initiator: initiator, createdAt: nil, content: items, priviliges: priviligeDictionary)
             return shoppingList
         }
+        
         return nil
     }
     
+    // loads a shopping list specified by its id
+    // mode = subscribe: subscribes to the shopping list in the realtime database and continuously receives updates
+    // mode = load: only loads the shopping list once
     static func loadShoppingList(mode: WatchType = .subscribe,listId: String, completion: @escaping (ShoppingList)->()) -> DatabaseHandle? {
         if mode == .subscribe{
             let ref: DatabaseHandle = FirebaseHelper.getRealtimeDB().child("lists").child(listId).observe(.value) { (snapshot) in

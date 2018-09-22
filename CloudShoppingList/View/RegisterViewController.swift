@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 
+// view controller for registering new users
 class RegisterViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
@@ -46,6 +47,11 @@ class RegisterViewController: UIViewController {
         mailTextField.delegate = self
         passwordTextField.delegate = self
         passwordRetypeTextField.delegate = self
+    }
+    
+    // hide keyboard when view controller is touched
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		430B36E421010580005EADCF /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E321010580005EADCF /* InviteTableViewCell.swift */; };
-		430B36E621010658005EADCF /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E521010658005EADCF /* ShareController.swift */; };
 		430B36E821011A85005EADCF /* NotificationListenerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E721011A85005EADCF /* NotificationListenerController.swift */; };
 		430B36EA2101293B005EADCF /* NotificationInvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36E92101293B005EADCF /* NotificationInvitationTableViewCell.swift */; };
 		430B36EC210317DF005EADCF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430B36EB210317DF005EADCF /* SettingsViewController.swift */; };
@@ -19,7 +18,6 @@
 		4313D34E20D4610C00B93B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4313D34D20D4610C00B93B11 /* Assets.xcassets */; };
 		4313D35120D4610C00B93B11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4313D34F20D4610C00B93B11 /* LaunchScreen.storyboard */; };
 		4313D35920D4617D00B93B11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4313D35820D4617C00B93B11 /* GoogleService-Info.plist */; };
-		43250B5B21031D1C00C2783F /* ClassUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43250B5A21031D1C00C2783F /* ClassUtility.swift */; };
 		435F36A720FA604200586B13 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435F36A620FA604200586B13 /* LoginViewController.swift */; };
 		435F36B520FA62ED00586B13 /* SourceSansPro-ExtraLightIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 435F36A920FA62EA00586B13 /* SourceSansPro-ExtraLightIt.otf */; };
 		435F36B620FA62ED00586B13 /* SourceSansPro-It.otf in Resources */ = {isa = PBXBuildFile; fileRef = 435F36AA20FA62EA00586B13 /* SourceSansPro-It.otf */; };
@@ -62,7 +60,6 @@
 /* Begin PBXFileReference section */
 		3874D6B081102F9B10EDC382 /* Pods-CloudShoppingList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudShoppingList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloudShoppingList/Pods-CloudShoppingList.debug.xcconfig"; sourceTree = "<group>"; };
 		430B36E321010580005EADCF /* InviteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
-		430B36E521010658005EADCF /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		430B36E721011A85005EADCF /* NotificationListenerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListenerController.swift; sourceTree = "<group>"; };
 		430B36E92101293B005EADCF /* NotificationInvitationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInvitationTableViewCell.swift; sourceTree = "<group>"; };
 		430B36EB210317DF005EADCF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +72,6 @@
 		4313D35020D4610C00B93B11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4313D35220D4610C00B93B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4313D35820D4617C00B93B11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		43250B5A21031D1C00C2783F /* ClassUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassUtility.swift; sourceTree = "<group>"; };
 		435F36A620FA604200586B13 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		435F36A920FA62EA00586B13 /* SourceSansPro-ExtraLightIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-ExtraLightIt.otf"; sourceTree = "<group>"; };
 		435F36AA20FA62EA00586B13 /* SourceSansPro-It.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-It.otf"; sourceTree = "<group>"; };
@@ -186,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				435F36CA20FA6A1C00586B13 /* AuthenticationController.swift */,
-				430B36E521010658005EADCF /* ShareController.swift */,
 				430B36E721011A85005EADCF /* NotificationListenerController.swift */,
 			);
 			path = Controller;
@@ -229,7 +224,6 @@
 				435F36CC20FA6A6E00586B13 /* NotificationUtility.swift */,
 				435F36D020FA8A1C00586B13 /* FirebaseHelper.swift */,
 				435F36DA20FB9C5C00586B13 /* Me.swift */,
-				43250B5A21031D1C00C2783F /* ClassUtility.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -479,7 +473,6 @@
 				435F36DD20FB9E5700586B13 /* ShoppingListTableViewCell.swift in Sources */,
 				435F36DF20FBAA1400586B13 /* ShoppingList.swift in Sources */,
 				435F36E920FBC9DE00586B13 /* CreateViewController.swift in Sources */,
-				430B36E621010658005EADCF /* ShareController.swift in Sources */,
 				435F36EF21006FF000586B13 /* Notification.swift in Sources */,
 				435F36E720FBC79700586B13 /* ShareViewController.swift in Sources */,
 				430B36EE2103180B005EADCF /* SettingTableViewCell.swift in Sources */,
@@ -502,7 +495,6 @@
 				435F36C720FA64B200586B13 /* RoundedView.swift in Sources */,
 				43AE819821499D5200C0B5A6 /* NotificationInfoTableViewCell.swift in Sources */,
 				430B36EC210317DF005EADCF /* SettingsViewController.swift in Sources */,
-				43250B5B21031D1C00C2783F /* ClassUtility.swift in Sources */,
 				435F36C520FA639500586B13 /* RoundedButton.swift in Sources */,
 				430B36E821011A85005EADCF /* NotificationListenerController.swift in Sources */,
 				435F36D520FB931100586B13 /* LandingViewController.swift in Sources */,
@@ -658,7 +650,10 @@
 				DEVELOPMENT_TEAM = 6V8K32D38V;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = htw.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -676,7 +671,10 @@
 				DEVELOPMENT_TEAM = 6V8K32D38V;
 				INFOPLIST_FILE = CloudShoppingList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = htw.CloudShoppingList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

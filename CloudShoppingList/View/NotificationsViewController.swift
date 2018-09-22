@@ -9,6 +9,7 @@
 import UIKit
 import DZNEmptyDataSet
 
+// view controller to show all notifications for the current user
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -69,12 +70,14 @@ extension NotificationsViewController: UITableViewDataSource{
     }
 }
 
+// protocol implementation for norification of type information
 extension NotificationsViewController: ReadActionDelegate{
     func readTapped(notification: Notification) {
         NotificationListenerController.shared.removeNotification(notification: notification)
     }
 }
 
+// protocol implementation for norification of type invitation
 extension NotificationsViewController: InvitationActionDelegate{
     func acceptedTapped(notification: Notification) {
         print("accepted tapped")
@@ -101,6 +104,7 @@ extension NotificationsViewController: InvitationActionDelegate{
         
 }
 
+// protocol for DZN configuration 
 extension NotificationsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "emptynotifications")

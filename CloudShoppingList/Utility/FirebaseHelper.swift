@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseDatabase
 
+// firebase helper methods for configured firebase access
 struct FirebaseHelper{
     private static var db: Firestore? = nil
     private static let ref: DatabaseReference! = Database.database().reference()
@@ -39,6 +40,7 @@ struct FirebaseHelper{
     }
 }
 
+// enum to manage the realtimedb paths
 enum FirestoreData{
     static let userCollection: String = "users"
     static let profilePicStorage: String = "userProfilPictures"

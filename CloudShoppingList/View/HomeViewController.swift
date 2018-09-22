@@ -12,6 +12,7 @@ import FirebaseDatabase
 import SwiftyJSON
 import FirebaseMessaging
 
+// view controller to display all shopping lists a user belongs to
 class HomeViewController: UIViewController, FUICollectionDelegate{
     
     @IBOutlet weak var tableView: UITableView!
@@ -33,7 +34,9 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
     
     private func setupData(){
         Messaging.messaging().subscribe(toTopic: Me.uid) { error in
-            print("Subscribed to my userid channel")
+            if let error = error {
+                print(error)
+            }
         }
 
     }
@@ -51,18 +54,10 @@ extension HomeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ShoppingListTableViewCell
         let info = JSON((shoppingLists[(UInt(indexPath.row))] as? DataSnapshot)?.value as Any).dictionaryValue
-        
         let list = ListRepresentation(listId: (info["listId"]?.stringValue)!, listName: (info["title"]?.stringValue)!)
-        
         cell.configure(for: list, delegate: self)
-        
         return cell
     }
-    
-    func formatMemberInfo(membercount: Int) -> String{
-        return "Du und \(membercount - 1) Mitglieder"
-    }
-    
 }
 
 extension HomeViewController: UITableViewDelegate{
@@ -78,13 +73,10 @@ extension HomeViewController: UITableViewDelegate{
         if (editingStyle == UITableViewCellEditingStyle.delete){
             let info = JSON((shoppingLists[(UInt(indexPath.row))] as? DataSnapshot)?.value as Any).dictionaryValue
             let id = info["listId"]?.stringValue
+            
             if let id = id{
-                // delete from db
-                ShoppingList.deleteShoppingList(listId: id, completion: {
-                    
-                }) {
-                    
-                }
+                ShoppingList.deleteShoppingList(listId: id)
+                NotificationUtility.showPrettyMessage(with: "Liste erfolgreich gelöscht", button: "ok", style: .success)
             }
         }
     }
@@ -121,13 +113,9 @@ extension HomeViewController{
     func array(_ array: FUICollection, didMove object: Any, from fromIndex: UInt, to toIndex: UInt) {
         self.tableView.insertRows(at: [IndexPath(row: Int(toIndex), section: 0)], with: .automatic)
         self.tableView.deleteRows(at: [IndexPath(row: Int(fromIndex), section: 0)], with: .automatic)
-        
-        
     }
     func array(_ array: FUICollection, didRemove object: Any, at index: UInt) {
         self.tableView.deleteRows(at: [IndexPath(row: Int(index), section: 0)], with: .automatic)
-        
-        
     }
     func array(_ array: FUICollection, didChange object: Any, at index: UInt) {
         self.tableView.reloadRows (at: [IndexPath(row: Int(index), section: 0)], with: .none)

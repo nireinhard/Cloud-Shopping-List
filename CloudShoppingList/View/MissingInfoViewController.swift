@@ -8,6 +8,8 @@
 
 import UIKit
 
+// view controller to show when user registered via google or facebook
+// and still needs to submit a username for his account
 class MissingInfoViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!

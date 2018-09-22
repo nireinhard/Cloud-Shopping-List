@@ -9,27 +9,25 @@
 import Foundation
 import FirebaseAuth
 
+// controller to handle the authentication process in the app
 struct AuthenticationController{
     
+    // registers a new user with the specified data
     static func registerUser(withName: String, email: String, password: String, completion: @escaping (User?) -> Swift.Void) {
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
-                
                 guard let user = user else{
                     NotificationUtility.showPrettyMessage(with: "Es ist ein Fehler aufgetreten", button: "ok", style: .error)
                     completion(nil)
                     return
                 }
                 
+                // sends a verification mail to the newly created user
                 user.user.sendEmailVerification(completion: nil)
-                
                 let usr = User(id: user.user.uid, username: withName, mail: email)
-                                
                 usr.save {
                     completion(usr)
                 }
-                
-                
             }else {
                 if let errCode = AuthErrorCode(rawValue: error!._code) {
                     print(errCode)
@@ -48,6 +46,7 @@ struct AuthenticationController{
         })
     }
     
+    // login a user with google sign in
     static func loginUserGoogle(credentials: AuthCredential, completion: @escaping(String?)->()){
         Auth.auth().signInAndRetrieveData(with: credentials) { (authResult, error) in
             let userInfo = ["userid": authResult!.user.uid, "email": "", "type": "google"]
@@ -56,6 +55,7 @@ struct AuthenticationController{
         }
     }
     
+    // login a user with email and password
     static func loginUser(withEmail: String, password: String, completion: @escaping (String?)->()) {
         Auth.auth().signIn(withEmail: withEmail, password: password, completion: { (user, error) in
             if error == nil {
@@ -91,6 +91,7 @@ struct AuthenticationController{
         })
     }
     
+    // logout the current user
     static func logOutUser(completion: @escaping (Bool) -> Swift.Void) {
         do {
             try Auth.auth().signOut()
@@ -101,8 +102,8 @@ struct AuthenticationController{
         }
     }
     
+    // set user data in the User defaults store to save credentials for next app start
     private static func setUserLocalData(_ userInfo: Dictionary<String,String>){
         UserDefaults.standard.set(userInfo, forKey: "userInformation")
-        print(UserDefaults.standard.dictionary(forKey: "userInformation")!)
     }
 }
