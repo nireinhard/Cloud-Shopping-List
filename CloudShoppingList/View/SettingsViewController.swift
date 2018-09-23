@@ -13,6 +13,7 @@ struct UserPrivilige{
     var canEdit: Bool
 }
 
+// view controller to manage the privilges of the users belonging to the shopping list
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var listTitleTextField: UITextField!
@@ -21,6 +22,8 @@ class SettingsViewController: UIViewController {
     
     var shoppingList: ShoppingList! {
         didSet{
+            // transformation of the priviliges Map to an Array of UserPriviliges
+            // this is needed for the correct integration with the table view
             shoppingList.priviliges.sorted { $0.0.compare($1.0) == .orderedAscending }
                 .forEach { if $0.key != Me.uid{ membersArray.append(UserPrivilige(id: $0.key, canEdit: $0.value)) }}
         }
@@ -78,9 +81,7 @@ extension SettingsViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingcell", for: indexPath) as! SettingTableViewCell
         let userId = membersArray[indexPath.row].id
         let status = membersArray[indexPath.row].canEdit
-  
         cell.configure(for: userId as! String, and: shoppingList.listId, with: status as! Bool)
-        
         return cell
     }
 }

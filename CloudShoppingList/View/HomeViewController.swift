@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
+    // listen to all lists of current user
     let shoppingLists = FUIArray(query: Database.database().reference().child("users").child(Me.uid).child("lists"))
     var listForSegue: ListRepresentation?
     
@@ -24,21 +25,25 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
         super.viewDidLoad()
         self.shoppingLists.observeQuery()
         self.shoppingLists.delegate = self
+        setupTableView()
+        receivePushNotifications()
+        NotificationListenerController.shared.startListening {}
+    }
+    
+    private func setupTableView(){
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.rowHeight = 75
         tableView.tableFooterView = UIView()
-        setupData()
-        NotificationListenerController.shared.startListening {}
     }
     
-    private func setupData(){
+    // subscribes to the current user channel
+    private func receivePushNotifications(){
         Messaging.messaging().subscribe(toTopic: Me.uid) { error in
             if let error = error {
                 print(error)
             }
         }
-
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {

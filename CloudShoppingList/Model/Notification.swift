@@ -52,7 +52,7 @@ struct Notification{
                     // adds the notification to the user in the users collection
                     FirebaseHelper.getRealtimeDB().child("users").child(member.key).child("notifications").childByAutoId().updateChildValues(notificationData)
                     // push the notification tot the user
-                    sendPushNotification(message, member.key)
+                    sendPushNotification(title: "Neue Position", message, member.key)
                 }
             }
         }
@@ -69,7 +69,7 @@ struct Notification{
         // adds the notification to the user in the users collection
         FirebaseHelper.getRealtimeDB().child("users").child(receiverUser.id).child("notifications").childByAutoId().updateChildValues(notificationData)
         // push the notification tot the user
-        sendPushNotification(message, receiverUser.id)
+        sendPushNotification(title: "Neue Einladung", message, receiverUser.id)
     }
     
     static func getAllNotifcationsFor(userId: String){
@@ -79,12 +79,12 @@ struct Notification{
     }
     
     // responsible to send a push notification to a specified user through the API
-    private static func sendPushNotification(_ message: String, _ userId: String){
+    private static func sendPushNotification(title: String, _ message: String, _ userId: String){
         let parameters: Parameters = [
             "secret": "1234ABCD",
             "topic": userId,
             "body": message,
-            "title": "Neue Position"
+            "title": title
         ]
         Alamofire.request("https://shoppinglist-service.herokuapp.com/messages", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: [:])
     }

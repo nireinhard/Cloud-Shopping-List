@@ -28,7 +28,7 @@ class ShareViewController: UIViewController {
         UIUtility.configureTextFields(textFields: [usernameTextField], borderColor: UIColor.darkGray.cgColor)
     }
     
-    // retrieves all users from the database and saves them in a user array
+    // retrieves all users from the database and saves them in the user array
     private func loadAllUsers(){
         User.loadAllUsers(completion: { [weak self](userlist) in
             print("all users \(userlist)")

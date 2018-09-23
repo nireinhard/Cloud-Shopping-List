@@ -92,7 +92,6 @@ struct User{
                     }
                 }
             }
-            
             completion(userList)
         }
     }

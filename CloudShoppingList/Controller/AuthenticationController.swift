@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseMessaging
 
 // controller to handle the authentication process in the app
 struct AuthenticationController{
@@ -94,6 +95,7 @@ struct AuthenticationController{
     // logout the current user
     static func logOutUser(completion: @escaping (Bool) -> Swift.Void) {
         do {
+            Messaging.messaging().unsubscribe(fromTopic: Me.uid)
             try Auth.auth().signOut()
             UserDefaults.standard.removeObject(forKey: "userInformation")
             completion(true)

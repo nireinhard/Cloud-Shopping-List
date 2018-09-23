@@ -39,10 +39,3 @@ struct FirebaseHelper{
         ref.removeObserver(withHandle: listener)
     }
 }
-
-// enum to manage the realtimedb paths
-enum FirestoreData{
-    static let userCollection: String = "users"
-    static let profilePicStorage: String = "userProfilPictures"
-    static let groupCollection: String = "groups"
-}
