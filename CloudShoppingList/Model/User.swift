@@ -42,7 +42,7 @@ struct User{
         self.lists = lists
     }
     
-    // creates a user object from a givin userid and JSON data and returns it, if successful
+    // creates a user object from a given userid and JSON data and returns it, if successful
     private static func createUserFromJSON(userId: String, data: JSON) -> User?{
         let data = data.dictionaryValue
         let metadata = data["metadata"]?.dictionaryValue

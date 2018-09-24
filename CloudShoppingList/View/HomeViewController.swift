@@ -23,8 +23,8 @@ class HomeViewController: UIViewController, FUICollectionDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.shoppingLists.observeQuery()
         self.shoppingLists.delegate = self
+        self.shoppingLists.observeQuery()
         setupTableView()
         receivePushNotifications()
         NotificationListenerController.shared.startListening {}

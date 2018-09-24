@@ -51,6 +51,17 @@ struct ShoppingList{
         FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("priviliges").updateChildValues([userId: false])
     }
     
+    // removes a member from the shopping list
+    mutating func removeMember(userId: String){
+        // make local changes
+        members[userId] = nil
+        priviliges[userId] = nil
+        // persist to firebase
+        FirebaseHelper.getRealtimeDB().child("users").child(userId).child("lists").child(self.listId).removeValue()
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("members").child(userId).setValue(nil)
+        FirebaseHelper.getRealtimeDB().child("lists").child(self.listId).child("priviliges").child(userId).setValue(nil)
+    }
+    
     // changes the title of the shopping list
     mutating func changeTitle(newTitle: String){
         // make local changes

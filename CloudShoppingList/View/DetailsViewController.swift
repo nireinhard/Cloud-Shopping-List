@@ -69,6 +69,11 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         setupTable()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+        self.memberTableView.reloadData()
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         self.memberTableView.reloadData()
@@ -86,7 +91,6 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     
     private func loadList() -> UInt?{
         if let list = listRepresentation{
-            // shoppingList = ShoppingList(listId: list.listId)
             let ref = ShoppingList.loadShoppingList(mode: .subscribe, listId: list.listId) { [weak self] (list) in
                 // shopping list loaded, attach content to table view
                 self?.shoppingList = list
@@ -107,7 +111,6 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         self.tableView.emptyDataSetDelegate = self
         tableView.tableFooterView = UIView()
         self.tableView.rowHeight = 55
-        
         self.memberTableView.delegate = self
         self.memberTableView.dataSource = self
     }
@@ -175,9 +178,31 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
+    // used to remove users by tapping on their avatar
+    // only initiator can remove other users
     @objc func handleTap(_ gesture: UITapGestureRecognizer){
         if let view = gesture.view{
-            if let index = horizontalScrollView?.items.index(of: view){
+            if let index = horizontalScrollView?.items.index(of: view), var shoppingList = shoppingList{
+                let tappedMember = members[index]
+                
+                let alert = UIAlertController(title: "Person entfernen", message: "Möchtest du \(tappedMember.username) wirklich entfernen?", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ja", style: .default, handler: { (action) in
+                    if shoppingList.initiator == Me.uid{
+                        if tappedMember.id == Me.uid{
+                            NotificationUtility.showPrettyMessage(with: "Der Eigentümer kann nicht nicht entfernt werden", button: "ok", style: .error)
+                        }else{
+                            shoppingList.removeMember(userId: tappedMember.id)
+                            self.horizontalScrollView!.refreshSubView() 
+                            self.memberTableView.reloadData()
+                        }
+                    }else{
+                        NotificationUtility.showPrettyMessage(with: "Du hast keine Berechtigung Personen zu entfnernen", button: "ok", style: .error)
+                    }
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
             }
         }
     }
@@ -199,18 +224,16 @@ extension DetailsViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
         if tableView == self.tableView{
             if let shoppingList = shoppingList{
-                return Me.uid == shoppingList.initiator
+                // only allow deleting if current user has write access or is initiator
+                return Me.uid == shoppingList.initiator || shoppingList.priviliges[members[indexPath.row].id]!
             }
             return false
         } else if tableView == self.memberTableView{
             return false
         }
-        
         return false
-        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -232,7 +255,6 @@ extension DetailsViewController: UITableViewDataSource{
         }else if tableView == self.memberTableView {
            return 1
         }
-       
         return 1
     }
     
